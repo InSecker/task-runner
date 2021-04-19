@@ -1,21 +1,27 @@
 import React from 'react';
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
+import MapView from "react-native-maps";
 
-export default class Map extends React.Component {
-    render() {
-        return (
-            <View style={styles.container}>
-            </View>
-        )
-    }
+
+export const Map = ({ users }) => {
+    const defaultRegion = { latitude: 37.78825, longitude: -122.4324, latitudeDelta: 0.0922, longitudeDelta: 0.0421, };
+    const selectRadomValueFrom = arr => arr[Math.floor(Math.random() * arr.length)];
+
+    return (
+        <MapView
+            style={StyleSheet.absoluteFillObject}
+            initialRegion={defaultRegion}>
+            {users && users.map((u, i) => (
+                <MapView.Marker
+                    key={i}
+                    coordinate={{
+                        latitude: parseFloat(u.address.geo.lat),
+                        longitude: parseFloat(u.address.geo.lng)
+                    }}
+                    title={u.name}
+                    pinColor={selectRadomValueFrom([ "blue", "purple", "red", "yellow" ])}
+                />
+            ))}
+        </MapView>
+    )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1
-    },
-    stretch: {
-        width: 400,
-        height: 400
-    },
-});

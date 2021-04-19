@@ -2,18 +2,15 @@ import React from 'react';
 import { StyleSheet, TextInput, View } from "react-native";
 import { Icon } from "react-native-elements";
 
-export default class SearchBar extends React.Component {
-    render() {
-        const { searchText, onSearch } = this.props;
-        return (
-            <View style={styles.main_container}>
-                <View style={styles.searchContent}>
-                    <TextInput style={styles.textinput} onChangeText={(text) => onSearch(text)} placeholder='Rechercher un utilisateur'/>
-                    <Icon name='search' size={30}/>
-                </View>
+export const SearchBar = ({ searchText, onSearch }) => {
+    return (
+        <View style={styles.main_container}>
+            <View style={styles.searchContent}>
+                <TextInput style={styles.textinput} onChangeText={(text) => onSearch(text)} placeholder='Rechercher un utilisateur'/>
+                <Icon name='search' size={30}/>
             </View>
-        )
-    }
+        </View>
+    )
 }
 
 const styles = StyleSheet.create({
@@ -28,7 +25,7 @@ const styles = StyleSheet.create({
     },
     searchContent: {
         flexDirection: 'row',
-        bottom: '30%',
+        bottom: '25%',
         width: '100%',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -46,10 +43,5 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4,
         elevation: 5,
-    },
-    searchicon: {
-        width: 30,
-        height: 30,
-        marginRight: 10
     }
 })
