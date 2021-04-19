@@ -32,6 +32,7 @@ export const App = () => {
                     <Map users={users}/>
                     <StatusBar style="auto"/>
                     <SearchBar style={styles.searchbar} searchText={searchText} onSearch={(searchedText) => getSearchedMovies(searchedText)}/>
+                    <UserList data={users}/>
                 </View>
             </View>
         </SafeAreaView>
