@@ -1,13 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { fetchUsers } from "./src/app/services/jsonplaceholder.service";
+import { fetchAlbumsByUserId, fetchTodosByUserId, fetchUsers } from "./src/app/services/jsonplaceholder.service";
 
 export default function App() {
 
 
-    fetchUsers().then((users) => {
-        console.log('>>', users);
+    fetchUsers().then(users => {
+        console.log('users : ', users);
+    });
+
+    fetchTodosByUserId(1).then(todos => {
+        console.log('todos : ', todos);
+    });
+
+    fetchAlbumsByUserId(1).then(albums => {
+        console.log('albums : ', albums);
     });
 
     return (
