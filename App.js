@@ -1,12 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import TodoCard from './src/app/components/TodoCard';
+import TodoList from './src/app/components/TodoList';
+import TodoMore from './src/app/components/TodoMore';
 
 export default function App() {
     return (
         <View style={styles.container}>
-            <Text>Open up App.js to start working on your app!</Text>
             <StatusBar style="auto"/>
+            <TodoMore/>
+            <TodoList/>
         </View>
     );
 }
