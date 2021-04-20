@@ -11,19 +11,13 @@ export const App = () => {
     const [ searchText, setSearchText ] = useState('');
     const [ users, setUsers ] = useState([]);
 
-    const fetchUsers = () => {
-        fetchAPI(api.endpoints.users).then(users => {
-            setUsers(users);
-        });
-    }
-
     const getSearchedMovies = (searchedText) => {
         console.log('je chercher le user : ', searchedText);
     }
 
     useEffect(() => {
-        fetchUsers()
-    }, []);
+        fetchAPI(config.endpoints.users).then(result => setUsers(result))
+    }, [])
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
