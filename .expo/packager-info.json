@@ -1,5 +1,10 @@
 {
   "devToolsPort": 19002,
   "expoServerPort": 19000,
-  "packagerPort": 19000
+  "packagerPort": 19000,
+  "packagerPid": null,
+  "expoServerNgrokUrl": "https://du-j5x.anonymous.task-runner.exp.direct",
+  "packagerNgrokUrl": "https://packager.du-j5x.anonymous.task-runner.exp.direct",
+  "ngrokPid": 801,
+  "webpackServerPort": null
 }
