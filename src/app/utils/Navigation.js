@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Home from "./Home";
-import UserCard from "./UserCard";
+import Home from "../view/Home";
+import UserCard from "../components/UserCard";
 
 const pages = [
   {
