@@ -1,15 +1,22 @@
 import React from 'react';
-import { StyleSheet, ScrollView, View, SafeAreaView } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 import UserCard from "./UserCard";
 
 const UserList = ({ users }) => {
+
+    const pressed = () => {
+        console.log('pressed')
+    }
+
     return (
         <SafeAreaView>
             <View style={styles.container}>
-                <View style={{ height: 150 }}>
+                <View style={{ height: 160 }}>
                     <ScrollView horizontal>
                         <View style={styles.list}>
-                            {users && users.map((user, i) => <UserCard user={user} key={i}/>)}
+                            {users && users.map((user, i) => (
+                                <UserCard user={user} key={i}/>
+                            ))}
                         </View>
                     </ScrollView>
                 </View>

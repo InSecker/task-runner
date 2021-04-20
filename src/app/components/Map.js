@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet } from "react-native";
-import MapView from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
 
 
 export const Map = ({ users }) => {
@@ -12,7 +12,7 @@ export const Map = ({ users }) => {
             style={StyleSheet.absoluteFillObject}
             initialRegion={defaultRegion}>
             {users && users.map((u, i) => (
-                <MapView.Marker
+                <Marker
                     key={i}
                     coordinate={{
                         latitude: parseFloat(u.address.geo.lat),

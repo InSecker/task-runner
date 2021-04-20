@@ -10,10 +10,14 @@ const userIcon = `<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://
 const UserCard = ({ user }) => {
 
     const { name } = user;
+    const [ firstname, lastname ] = name.split(' ');
     return (
         <View style={styles.container}>
-            <UserIcon/>
-            <Text style={styles.text}>{name}</Text>
+            <View style={{ marginBottom: 15 }}>
+                <UserIcon/>
+            </View>
+            <Text style={styles.firstname}>{firstname}</Text>
+            <Text style={styles.lastname}>{lastname}</Text>
         </View>
     )
 }
@@ -25,8 +29,8 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        width: 130,
-        height: 130,
+        width: 150,
+        height: 150,
         marginLeft: 20,
         backgroundColor: 'white',
         borderRadius: 16,
@@ -46,8 +50,14 @@ const styles = StyleSheet.create({
         marginLeft: "auto",
         marginRight: "auto"
     },
-    text: {
-        marginTop: 15,
+    firstname: {
+        fontSize: 14,
+        marginBottom: 5,
+        textAlign: "center"
+    },
+    lastname: {
+        fontSize: 16,
+        fontWeight: 'bold',
         textAlign: "center"
     }
 });

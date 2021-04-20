@@ -20,10 +20,9 @@ const SearchBar = ({ searchText, onSearch }) => {
 const styles = StyleSheet.create({
     main_container: {
         flex: 1,
-        backgroundColor: 'red',
-        width: "85%",
+        width: "90%",
         position: "absolute",
-        bottom: '20%'
+        bottom: 180
     },
     textinput: {
         height: 50,
