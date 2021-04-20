@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import { SvgXml } from "react-native-svg";
 
 const userIcon = `<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
@@ -7,22 +7,23 @@ const userIcon = `<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://
 <path fill="black" d="M20 0C16.0444 0 12.1776 1.17298 8.8886 3.37061C5.59962 5.56823 3.03617 8.69181 1.52242 12.3463C0.00866566 16.0009 -0.387401 20.0222 0.384303 23.9018C1.15601 27.7814 3.06082 31.3451 5.85787 34.1421C8.65492 36.9392 12.2186 38.844 16.0982 39.6157C19.9778 40.3874 23.9991 39.9913 27.6537 38.4776C31.3082 36.9638 34.4318 34.4004 36.6294 31.1114C38.827 27.8224 40 23.9556 40 20C39.9939 14.6975 37.8849 9.61396 34.1355 5.86454C30.386 2.11513 25.3025 0.0060496 20 0ZM11.4286 34.8243V32.8571C11.4297 31.7208 11.8816 30.6314 12.6851 29.8279C13.4886 29.0245 14.578 28.5726 15.7143 28.5714H24.2857C25.422 28.5726 26.5114 29.0245 27.3149 29.8279C28.1184 30.6314 28.5703 31.7208 28.5714 32.8571V34.8243C25.9702 36.3431 23.0122 37.1435 20 37.1435C16.9878 37.1435 14.0298 36.3431 11.4286 34.8243ZM31.4171 32.7514C31.3887 30.8776 30.6252 29.09 29.2913 27.7737C27.9574 26.4574 26.1597 25.7178 24.2857 25.7143H15.7143C13.8403 25.7178 12.0426 26.4574 10.7087 27.7737C9.37478 29.09 8.61133 30.8776 8.58286 32.7514C5.99224 30.4382 4.16534 27.3927 3.34406 24.0181C2.52278 20.6435 2.74586 17.0991 3.98378 13.8541C5.22169 10.6091 7.41604 7.81667 10.2763 5.84652C13.1365 3.87638 16.5276 2.82146 20.0007 2.82146C23.4738 2.82146 26.865 3.87638 29.7252 5.84652C32.5854 7.81667 34.7797 10.6091 36.0177 13.8541C37.2556 17.0991 37.4787 20.6435 36.6574 24.0181C35.8361 27.3927 34.0092 30.4382 31.4186 32.7514H31.4171Z"/>
 </svg>`;
 
-const UserCard = ({ user }) => {
+const UserCard = ({ user, navigation }) => {
 
-    const { name } = user;
+    const { name, id } = user;
     const [ firstname, lastname ] = name.split(' ');
     return (
-        <View style={styles.container}>
-            <View style={{ marginBottom: 15 }}>
-                <UserIcon/>
+        <TouchableHighlight onPress={() => navigation.navigate('UserDetails', { id })} underlayColor={'transparent'}>
+            <View style={styles.container}>
+                <View style={{ marginBottom: 15 }}>
+                    {/*<UserIcon/>*/}
+                </View>
+                <Text style={styles.firstname}>{firstname}</Text>
+                <Text style={styles.lastname}>{lastname}</Text>
             </View>
-            <Text style={styles.firstname}>{firstname}</Text>
-            <Text style={styles.lastname}>{lastname}</Text>
-        </View>
+        </TouchableHighlight>
     )
 }
 
-const UserIcon = () => <SvgXml xml={userIcon}/>;
 
 const styles = StyleSheet.create({
     container: {

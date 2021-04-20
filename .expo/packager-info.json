@@ -6,5 +6,5 @@
   "expoServerNgrokUrl": "https://du-j5x.anonymous.task-runner.exp.direct",
   "packagerNgrokUrl": "https://packager.du-j5x.anonymous.task-runner.exp.direct",
   "ngrokPid": 801,
-  "webpackServerPort": null
+  "webpackServerPort": 19006
 }
