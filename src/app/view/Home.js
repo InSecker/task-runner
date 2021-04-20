@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView, StyleSheet, View } from "react-native";
 import { configuration as api } from "../../../config";
-import { SearchBar } from "../components/SearchBar";
+import SearchBar from "../components/SearchBar";
 import { fetchAPI } from "../utils/fetch";
-import { Map } from "../components/Map";
+import Map from "../components/Map";
 
-export const App = () => {
+const Home = () => {
   const [searchText, setSearchText] = useState("");
   const [users, setUsers] = useState([]);
 
@@ -54,4 +54,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default Home;
