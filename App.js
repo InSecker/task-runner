@@ -16,6 +16,8 @@ export default function App() {
         fetchAPI(api.endpoints.todos).then(result => setData(result))
     }, []);
 
+
+
     return (
         <View style={styles.container}>
             <StatusBar style="auto"/>

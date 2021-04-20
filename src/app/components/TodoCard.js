@@ -5,13 +5,15 @@ import { Image } from 'react-native';
 import { View } from 'react-native';
 import { Icon } from 'react-native-elements'
 
+
+
 const TodoCard = ({data}) => {
 
     return (
         <View style={styles.main_container}>
             <View style={styles.todoContent}>
                 <Text style={styles.text}>{data.title}</Text>
-                <Icon name="check-box" size={20}/>
+                {data.completed? <Icon style={styles.icon} name="check-box" size={20}></Icon> : <Icon style={styles.icon} name="check-box-outline-blank" size={20}></Icon>}
             </View>
         </View>
     )

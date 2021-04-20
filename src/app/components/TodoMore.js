@@ -26,10 +26,13 @@ const AppButton = ({ onPress, title, size, backgroundColor }) => (
         {title}
       </Text>
     </TouchableOpacity>
-  );
+);
 
 
-const TodoMore = () => {
+
+
+
+const TodoMore = ({UserId, title, completed, onSearch}) => {
     return(
         <View style={styles.maincontainer}>
             <View style={styles.container}>
@@ -41,7 +44,11 @@ const TodoMore = () => {
                     <Icon style={styles.iconClose} name="close" size={25}></Icon>
                 </View>
                 <Text style={styles.titleNew}>Créer un nouveau Todo</Text>
-                <TextInput style={styles.contentNew} onChangeText={(text) => onTodo(text)} placeholder='Description de votre Todo'></TextInput>
+                <TextInput
+                    style={styles.contentNew}
+                    onChangeText={(text) => onTodo(text)} 
+                    placeholder='Description de votre Todo'
+                />
                 <AppButton title="Valider" size="sm" backgroundColor="#fff" />
             </View>
         </View>

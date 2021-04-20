@@ -8,3 +8,23 @@ export const fetchAPI = async (endpoints) => {
     console.error(e);
   }
 }
+
+export const fetchAddTodo = async (endpoints, UserId, title) => {
+  try{
+    const response = await fetch(`${api.base_url}${endpoints}`, {
+      method: 'POST',
+        body: JSON.stringify({
+            UserId: {UserId},
+            title: {title},
+            completed: false,
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    });
+    return response.json();
+  }
+  catch(e){
+    console.error(e);
+  }
+}
