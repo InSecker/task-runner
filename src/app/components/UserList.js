@@ -2,11 +2,8 @@ import React from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 import UserCard from "./UserCard";
 
-const UserList = ({ users }) => {
+const UserList = ({ users, navigation }) => {
 
-    const pressed = () => {
-        console.log('pressed')
-    }
 
     return (
         <SafeAreaView>
@@ -15,7 +12,7 @@ const UserList = ({ users }) => {
                     <ScrollView horizontal>
                         <View style={styles.list}>
                             {users && users.map((user, i) => (
-                                <UserCard user={user} key={i}/>
+                                <UserCard navigation={navigation} user={user} key={i}/>
                             ))}
                         </View>
                     </ScrollView>

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { Button, StyleSheet, View } from "react-native";
 import { configuration as api } from "../../../config";
-import SearchBar from "../components/SearchBar";
 import { fetchAPI } from "../utils/fetch";
 import { Map } from "../components/Map";
+import SearchBar from "../components/SearchBar";
 import UserList from "../components/UserList";
 
 const Home = ({ navigation }) => {
@@ -31,7 +31,7 @@ const Home = ({ navigation }) => {
             <StatusBar style="auto"/>
             <Button title="Afficher un utilisateur" onPress={() => navigation.navigate('UserDetails', { id: 1 })}/>
             <SearchBar searchText={searchText} onSearch={(searchedText) => getSearchedMovies(searchedText)}/>
-            <UserList users={users}/>
+            <UserList users={users} navigation={navigation}/>
         </View>
     );
 };
