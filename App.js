@@ -1,15 +1,25 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import TodoCard from './src/app/components/TodoCard';
+import { configuration as api} from './config';
 import TodoList from './src/app/components/TodoList';
-import TodoMore from './src/app/components/TodoMore';
+import {fetchAPI} from './src/app/utils/fetch';
+
 
 export default function App() {
+
+    const [data, setData] = useState(null);
+
+    console.log(api.endpoints.todos);
+
+    useEffect(() => {
+        fetchAPI(api.endpoints.todos).then(result => setData(result))
+    }, []);
+
     return (
         <View style={styles.container}>
             <StatusBar style="auto"/>
-            <TodoList/>
+            {data && <TodoList data={data}/> }
         </View>
     );
 }

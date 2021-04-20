@@ -5,15 +5,16 @@ import { Image } from 'react-native';
 import { View } from 'react-native';
 import { Icon } from 'react-native-elements'
 
-const TodoCard = () => {
-  return (
-    <View style={styles.main_container}>
-        <View style={styles.todoContent}>
-            <Text style={styles.text}>Name To do list</Text>
-            <Icon name="check-box" size={20}/>
+const TodoCard = ({data}) => {
+
+    return (
+        <View style={styles.main_container}>
+            <View style={styles.todoContent}>
+                <Text style={styles.text}>{data.title}</Text>
+                <Icon name="check-box" size={20}/>
+            </View>
         </View>
-    </View>
-  )
+    )
 }
 
 export default TodoCard;
@@ -27,14 +28,14 @@ const styles = StyleSheet.create({
     todoContent: {
         flexDirection: 'row',
         width: '85%',
-        height: 50,
+        height: 60,
         justifyContent: 'space-between',
         alignItems: 'center',
         borderColor: '#fff',
         backgroundColor: '#fff',
         borderWidth: 1,
         borderRadius: 16,
-        padding: 10,
+        padding: 15,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -43,8 +44,10 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4,
         elevation: 5,
+        marginBottom: 15,
     },
     text: {
+        width: '80%',
         fontSize: 16,
         fontWeight: 500,
     }
