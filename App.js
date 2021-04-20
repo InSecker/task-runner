@@ -1,14 +1,21 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import UserList from './src/app/components/UserList';
 import {fetchAPI} from './src/app/utils/fetch';
 import {configuration as config} from './config/index.js';
 
 export default function App() {
-    const user = fetchAPI(config.endpoints.users);
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+        fetchAPI(config.endpoints.users).then(result => setData(result))
+    }, [])
+
+
+
     return (
         <View style={styles.container}>
-            <UserList data={user}/>
+            {data && <UserList data={data}/> }
         </View>
     );
 }
@@ -16,7 +23,6 @@ export default function App() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
     },
