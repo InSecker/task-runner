@@ -9,7 +9,7 @@ const TodoMore = () => {
     return(
         <View style={styles.container}>
             <Text style={styles.title}>To do list</Text>
-            <Icon name="add-box"></Icon>
+            <Icon style={styles.icon} name="add-box" size={30}></Icon>
         </View>
     )
 }
@@ -19,10 +19,13 @@ export default TodoMore;
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        display: 'inline',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        padding: 25,
     },
     title: {
         fontWeight: 'bold',
-        fontSize: '24px',
-    }
+        fontSize: 24,
+    },
 });
