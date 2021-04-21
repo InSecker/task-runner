@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "250px",
     backgroundColor: "grey",
-    opacity: 0.4,
+    opacity: 0.4
   },
   userContainer: {
     width: "330px",
