@@ -49,8 +49,8 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   roundedImage: {
-    borderTopLeftRadius: "12px",
-    borderBottomLeftRadius: "12px",
+    borderTopLeftRadius: 12,
+    borderBottomLeftRadius: 12,
     backgroundSize: "unset",
     width: "50px",
     height: "100%",

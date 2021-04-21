@@ -10,8 +10,11 @@ import MoreIcon from "../../../assets/More.png";
 import TodoList from "../../app/components/TodoList";
 import { fetchAPI } from "../utils/fetch";
 
-const UserDetails = ({}) => {
+const UserDetails = ({ route, navigation }) => {
+  const { id, user } = route.params;
+  console.log(user);
   const [todos, setTodos] = useState([]);
+  const [posts, setPosts] = useState([]);
   const [albums, setAlbums] = useState([]);
   const [isTodoModalOpen, setIsTodoModalOpen] = useState(false);
 
@@ -21,28 +24,34 @@ const UserDetails = ({}) => {
       randomAlbumIds.push(Math.floor(Math.random() * 6) + 1);
     }
     fetchAPI("/users/1/todos").then((result) => setTodos(result));
+    fetchAPI(`/users/${id}/posts`).then((result) =>
+      setPosts(result.slice(0, 4))
+    );
     fetchAPI("/photos").then((result) => {
       setAlbums(result.filter((album) => randomAlbumIds.includes(album.id)));
     });
   }, []);
   return (
     <View style={styles.container}>
-      <Header title="Back to home"></Header>
+      <Header
+        action={() => navigation.navigate("Home")}
+        title="Back to home"
+      ></Header>
       <View style={styles.mapContainer}></View>
       <View style={styles.userContainer}>
-        <Text style={styles.name}>Clementine Bauch</Text>
+        <Text style={styles.name}>{user?.name}</Text>
         <View style={styles.wrapper}>
           <View style={styles.userInfoRow}>
             <Image style={styles.userInfoIcon} source={CompanyIcon} />
-            <Text style={styles.userInfo}>Romaguera-Jacobso</Text>
+            <Text style={styles.userInfo}>{user?.company.name}</Text>
           </View>
           <View style={styles.userInfoRow}>
             <Image style={styles.userInfoIcon} source={EmailIcon} />
-            <Text style={styles.userInfo}>Nathan@yesenia.net</Text>
+            <Text style={styles.userInfo}>{user?.email}</Text>
           </View>
           <View style={styles.userInfoRow}>
             <Image style={styles.userInfoIcon} source={PhoneIcon} />
-            <Text style={styles.userInfo}>01 01 01 01 01</Text>
+            <Text style={styles.userInfo}>{user?.phone}</Text>
           </View>
           <View style={styles.todoRow}>
             <Text style={styles.todoTitle}>To do list</Text>
@@ -64,15 +73,12 @@ const UserDetails = ({}) => {
           <View style={styles.todoRow}>
             <Text style={styles.todoTitle}>Posts</Text>
           </View>
-          <View style={styles.post}>
-            <Post post={{ title: "Post title" }}></Post>
-          </View>
-          <View style={styles.post}>
-            <Post post={{ title: "Post title" }}></Post>
-          </View>
-          <View style={styles.post}>
-            <Post post={{ title: "Post title" }}></Post>
-          </View>
+          {posts &&
+            posts.map((post, i) => (
+              <View key={i} style={styles.post}>
+                <Post navigation={navigation} post={post} />
+              </View>
+            ))}
           <View style={styles.todoRow}>
             <Text style={styles.todoTitle}>Albums</Text>
           </View>
@@ -172,7 +178,7 @@ const styles = StyleSheet.create({
   moreIcon: {
     maxWidth: "32px",
     height: "32px",
-    borderRadius: "8px",
+    borderRadius: 8,
     backgroundColor: "white",
     flex: 1,
     justifyContent: "center",

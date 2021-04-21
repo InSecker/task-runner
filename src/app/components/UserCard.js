@@ -1,16 +1,21 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
 
-const UserCard = ({ user }) => {
+const UserCard = ({ user, navigation }) => {
   const { name } = user;
   const [firstname, lastname] = name.split(" ");
 
   return (
-    <View style={styles.container}>
-      <View style={{ marginBottom: 15 }}></View>
-      <Text style={styles.firstname}>{firstname}</Text>
-      <Text style={styles.lastname}>{lastname}</Text>
-    </View>
+    <TouchableHighlight
+      onPress={() => navigation.navigate("UserDetails", { id: user.id, user })}
+      underlayColor={"transparent"}
+    >
+      <View style={styles.container}>
+        <View style={{ marginBottom: 15 }}></View>
+        <Text style={styles.firstname}>{firstname}</Text>
+        <Text style={styles.lastname}>{lastname}</Text>
+      </View>
+    </TouchableHighlight>
   );
 };
 

@@ -1,14 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Text } from "react-native";
 import { TextInput } from "react-native";
-import { TouchableOpacity } from "react-native";
-import { Button } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { StyleSheet } from "react-native";
-import { Image } from "react-native";
-import { View } from "react-native";
 import { Icon } from "react-native-elements";
-import { configuration as api } from "../../../config";
-import { fetchAddTodo, fetchAPI } from "../utils/fetch";
 
 const AddButton = ({ onPress, title, size, backgroundColor }) => (
   <TouchableOpacity
