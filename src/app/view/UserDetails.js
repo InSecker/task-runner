@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     flexDirection: "column",
-    marginTop: "16px",
+    marginTop: "16px"
   },
   mapContainer: {
     width: "100%",
