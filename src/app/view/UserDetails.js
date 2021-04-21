@@ -1,5 +1,5 @@
-import React from "react";
-import { View, StyleSheet, Text, Image } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, StyleSheet, Text, Image, TouchableOpacity } from "react-native";
 import Header from "../components/Header";
 import Post from "../components/Post";
 import Album from "../components/Album";
@@ -7,9 +7,16 @@ import CompanyIcon from "../../../assets/Company.png";
 import EmailIcon from "../../../assets/Email.png";
 import PhoneIcon from "../../../assets/Phone.png";
 import MoreIcon from "../../../assets/More.png";
+import TodoList from "../../app/components/TodoList";
+import { fetchAPI } from "../utils/fetch";
 
-const UserDetails = ({ userData, route }) => {
-  // const { id } = route.params;
+const UserDetails = ({}) => {
+  const [todos, setTodos] = useState([]);
+  const [isTodoModalOpen, setIsTodoModalOpen] = useState(false);
+
+  useEffect(() => {
+    fetchAPI("/users/1/todos").then((result) => setTodos(result));
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -32,19 +39,20 @@ const UserDetails = ({ userData, route }) => {
           </View>
           <View style={styles.todoRow}>
             <Text style={styles.todoTitle}>To do list</Text>
-            <View style={styles.moreIcon}>
+            <TouchableOpacity
+              onPress={() => setIsTodoModalOpen(true)}
+              style={styles.moreIcon}
+            >
               <Image style={styles.icon} source={MoreIcon} />
-            </View>
+            </TouchableOpacity>
           </View>
-          <View style={styles.post}>
-            <Post post={{ title: "todo" }}></Post>
-          </View>
-          <View style={styles.post}>
-            <Post post={{ title: "todo" }}></Post>
-          </View>
-          <View style={styles.post}>
-            <Post post={{ title: "test" }}></Post>
-          </View>
+          {todos && (
+            <TodoList
+              isTodoModalOpen={isTodoModalOpen}
+              setIsTodoModalOpen={setIsTodoModalOpen}
+              data={todos}
+            />
+          )}
           <View style={styles.todoRow}>
             <Text style={styles.todoTitle}>Posts</Text>
           </View>

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { Button, StyleSheet, View } from "react-native";
 import { configuration as api } from "../../../config";
-import SearchBar from "../components/SearchBar";
 import { fetchAPI } from "../utils/fetch";
 // import  Map  from "../components/Map";
 import UserList from "../components/UserList";

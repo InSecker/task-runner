@@ -4,9 +4,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Home from "./src/app/view/Home";
 import UserDetails from "./src/app/view/UserDetails";
 
-const Stack = createStackNavigator();
-
 export default function App() {
+  const Stack = createStackNavigator();
   return (
     <NavigationContainer>
       <Stack.Navigator>
