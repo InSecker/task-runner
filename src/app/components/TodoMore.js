@@ -38,6 +38,7 @@ const TodoMore = ({data}) => {
     const [todo, setTodo] = useState([]);
     const [title, setTitle] = useState('');
     const [array,setArray] = useState([]);
+    const [newPosts,setPosts] = useState([]);
 
     const getTodo = (todo) => {
         console.log(todo);
@@ -45,9 +46,16 @@ const TodoMore = ({data}) => {
 
     const setTodoOnData = (title) => {
         const todoToSave = {title}
-        console.log(title);
-        data.push(todoToSave);
-        console.log(data);
+        // console.log(title);
+        // data.push(todoToSave);
+        // console.log(data);
+        const newPosts = [
+            ...data,
+            todoToSave
+          ]
+          setPosts(newPosts);
+
+        console.log(newPosts);
     }
 
    
