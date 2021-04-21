@@ -1,0 +1,53 @@
+import React from "react";
+import { View, StyleSheet, Image, Text } from "react-native";
+import ArrowIcon from "../../../assets/arrow.png";
+
+const Header = ({ title }) => {
+  return (
+    <View style={styles.container}>
+      <View style={styles.headerContainer}>
+        <View style={styles.headerWrapper}>
+          <View>
+            <Image style={styles.iconContainer} source={ArrowIcon} />
+          </View>
+          <Text>{title}</Text>
+        </View>
+      </View>
+    </View>
+  );
+};
+
+export default Header;
+
+const styles = StyleSheet.create({
+  container: {
+    position: "absolute",
+    left: 0,
+    top: 0,
+    width: "100%",
+    height: "60px",
+    fontFamily: "sans-serif",
+    zIndex: 10,
+  },
+  headerContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "flex-end",
+  },
+  headerWrapper: {
+    width: "100%",
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  iconContainer: {
+    height: "14px",
+    width: "14px",
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    marginLeft: "32px",
+    marginRight: "8px",
+  },
+});
