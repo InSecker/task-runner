@@ -13,7 +13,7 @@ export default function App() {
     console.log(api.endpoints.todos);
 
     useEffect(() => {
-        fetchAPI(api.endpoints.todos).then(result => setData(result))
+        fetchAPI('/users/1/todos').then(result => setData(result))
     }, []);
 
 

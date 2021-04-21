@@ -7,7 +7,7 @@ import TodoMore from './TodoMore';
 const TodoList = ({data}) => {
     return (
         <View>
-            <TodoMore/>
+            <TodoMore data={data}/>
             {data && data.map((user, i) => 
                 <TodoCard data={user} key={i} />
             )}

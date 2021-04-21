@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text } from 'react-native';
 import { TextInput } from 'react-native';
 import { TouchableOpacity } from 'react-native';
@@ -7,6 +7,8 @@ import { StyleSheet } from 'react-native';
 import { Image } from 'react-native';
 import { View } from 'react-native';
 import { Icon } from 'react-native-elements'
+import { configuration as api } from '../../../config';
+import { fetchAddTodo, fetchAPI } from '../utils/fetch';
 
 const AppButton = ({ onPress, title, size, backgroundColor }) => (
     <TouchableOpacity
@@ -30,9 +32,26 @@ const AppButton = ({ onPress, title, size, backgroundColor }) => (
 
 
 
+const TodoMore = ({data}) => {
+    
 
+    const [todo, setTodo] = useState([]);
+    const [title, setTitle] = useState('');
+    const [array,setArray] = useState([]);
 
-const TodoMore = ({UserId, title, completed, onSearch}) => {
+    const getTodo = (todo) => {
+        console.log(todo);
+    }
+
+    const setTodoOnData = (title) => {
+        const todoToSave = {title}
+        console.log(title);
+        data.push(todoToSave);
+        console.log(data);
+    }
+
+   
+
     return(
         <View style={styles.maincontainer}>
             <View style={styles.container}>
@@ -46,15 +65,20 @@ const TodoMore = ({UserId, title, completed, onSearch}) => {
                 <Text style={styles.titleNew}>Créer un nouveau Todo</Text>
                 <TextInput
                     style={styles.contentNew}
-                    onChangeText={(text) => onTodo(text)} 
+                    onChangeText={(title) => setTitle(title)} 
                     placeholder='Description de votre Todo'
                 />
-                <AppButton title="Valider" size="sm" backgroundColor="#fff" />
+                <AppButton title="Valider" size="sm" backgroundColor="#fff" onPress={() => {
+                    setTodoOnData(title)
+                }}/>
             </View>
         </View>
         
     )
+
 }
+
+
 
 
 export default TodoMore;
