@@ -1,1 +1,9 @@
-{}
+{
+  "webpackServerPort": 19006,
+  "expoServerPort": 19000,
+  "expoServerNgrokUrl": "https://ks-iar.macarthur13.task-runner.exp.direct",
+  "packagerNgrokUrl": "https://packager.ks-iar.macarthur13.task-runner.exp.direct",
+  "ngrokPid": 20063,
+  "devToolsPort": 19002,
+  "packagerPort": 19000
+}

@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, Image, TouchableOpacity } from "react-native";
 import Header from "../components/Header";
 import Post from "../components/Post";
 import Album from "../components/Album";
+import Modal from "../components/Modal";
 import CompanyIcon from "../../../assets/Company.png";
 import EmailIcon from "../../../assets/Email.png";
 import PhoneIcon from "../../../assets/Phone.png";
@@ -34,8 +35,23 @@ const UserDetails = ({ route, navigation }) => {
     });
   }, []);
 
+  const setTodoOnData = (todoToSave) => {
+    const newTodos = [{ title: todoToSave }, ...todos];
+    orderTodos(newTodos, setTodos);
+    setIsTodoModalOpen(false);
+  };
+
   return (
     <View style={styles.container}>
+      {isTodoModalOpen && (
+        <Modal
+          title="Create a new Todo"
+          action={(todoData) => setTodoOnData(todoData)}
+          close={() => setIsTodoModalOpen(false)}
+          placeholder="Enter your new todo"
+          actionTitle="Validate"
+        ></Modal>
+      )}
       <Header
         action={() => navigation.navigate("Home")}
         title="Back to home"
@@ -104,6 +120,7 @@ const styles = StyleSheet.create({
   container: {
     height: "auto",
     width: "100%",
+    position: "relative",
   },
   wrapper: {
     flex: 1,
