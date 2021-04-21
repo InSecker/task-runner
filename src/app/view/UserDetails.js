@@ -12,12 +12,19 @@ import { fetchAPI } from "../utils/fetch";
 
 const UserDetails = ({}) => {
   const [todos, setTodos] = useState([]);
+  const [albums, setAlbums] = useState([]);
   const [isTodoModalOpen, setIsTodoModalOpen] = useState(false);
 
   useEffect(() => {
+    const randomAlbumIds = [];
+    for (var i = 0; i < 15; i++) {
+      randomAlbumIds.push(Math.floor(Math.random() * 6) + 1);
+    }
     fetchAPI("/users/1/todos").then((result) => setTodos(result));
+    fetchAPI("/photos").then((result) => {
+      setAlbums(result.filter((album) => randomAlbumIds.includes(album.id)));
+    });
   }, []);
-
   return (
     <View style={styles.container}>
       <Header title="Back to home"></Header>
@@ -69,9 +76,13 @@ const UserDetails = ({}) => {
           <View style={styles.todoRow}>
             <Text style={styles.todoTitle}>Albums</Text>
           </View>
-          <View style={styles.post}>
-            <Album post={{ title: "Post title" }}></Album>
-          </View>
+          {albums.map(({ title, url }) => {
+            return (
+              <View style={styles.post}>
+                <Album title={title} url={url}></Album>
+              </View>
+            );
+          })}
         </View>
       </View>
     </View>
