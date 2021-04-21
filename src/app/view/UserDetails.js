@@ -3,11 +3,11 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Header from "../components/Header";
 import Post from "../components/Post";
 import Album from "../components/Album";
+import TodoList from "../../app/components/TodoList";
 import CompanyIcon from "../../../assets/Company.png";
 import EmailIcon from "../../../assets/Email.png";
 import PhoneIcon from "../../../assets/Phone.png";
 import MoreIcon from "../../../assets/More.png";
-import TodoList from "../../app/components/TodoList";
 import { fetchAPI, orderTodos } from "../utils/helpers";
 
 const UserDetails = ({ route, navigation }) => {
@@ -16,21 +16,25 @@ const UserDetails = ({ route, navigation }) => {
     const [posts, setPosts] = useState([]);
     const [albums, setAlbums] = useState([]);
     const [isTodoModalOpen, setIsTodoModalOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(false); // todo : add loader
 
     useEffect(() => {
         const randomAlbumIds = [];
+        setIsLoading(true);
         for (let i = 0; i < 15; i++) {
             randomAlbumIds.push(Math.floor(Math.random() * 6) + 1);
         }
-        fetchAPI(`/users/${id}/todos`).then((result) => {
-            orderTodos(result, setTodos);
-        });
-        fetchAPI(`/users/${id}/posts`).then((result) =>
-            setPosts(result.slice(0, 4))
-        );
-        fetchAPI("/photos").then((result) => {
-            setAlbums(result.filter((album) => randomAlbumIds.includes(album.id)));
-        });
+
+        Promise.all([
+            fetchAPI(`/users/${id}/todos`),
+            fetchAPI(`/users/${id}/posts`),
+            fetchAPI("/photos")
+        ]).then(([resTodos, resPosts, resAlbums]) => {
+            orderTodos(resTodos, setTodos);
+            setPosts(resPosts.slice(0, 4))
+            setAlbums(resAlbums.filter((album) => randomAlbumIds.includes(album.id)));
+            setIsLoading(false);
+        }).catch(err => console.log(err))
     }, []);
 
     return (
