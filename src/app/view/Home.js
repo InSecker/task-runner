@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { Button, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { configuration as api } from "../../../config";
 import { fetchAPI } from "../utils/fetch";
 // import  Map  from "../components/Map";
 import UserList from "../components/UserList";
+import SearchBar from "../components/SearchBar";
 
 const Home = ({ navigation }) => {
   const [searchText, setSearchText] = useState("");
@@ -28,15 +29,11 @@ const Home = ({ navigation }) => {
     <View style={styles.container}>
       {/* <Map style={{ flex: 1, backgroundColor: 'red' }} users={users}/> */}
       <StatusBar style="auto" />
-      <Button
-        title="Afficher un utilisateur"
-        onPress={() => navigation.navigate("UserDetails", { id: 1 })}
-      />
       <SearchBar
         searchText={searchText}
         onSearch={(searchedText) => getSearchedMovies(searchedText)}
       />
-      <UserList users={users} />
+      <UserList navigation={navigation} users={users} />
     </View>
   );
 };

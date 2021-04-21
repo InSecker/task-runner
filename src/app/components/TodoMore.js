@@ -1,20 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Text } from "react-native";
 import { TextInput } from "react-native";
-import { TouchableOpacity } from "react-native";
-import { Button } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { StyleSheet } from "react-native";
-import { Image } from "react-native";
-import { View } from "react-native";
 import { Icon } from "react-native-elements";
-import { configuration as api } from "../../../config";
-import { fetchAddTodo, fetchAPI } from "../utils/fetch";
 
-const AppButton = ({ onPress, title, size, backgroundColor }) => (
+const AddButton = ({ onPress, title, size, backgroundColor }) => (
   <TouchableOpacity
     onPress={onPress}
     style={[
-      styles.appButtonContainer,
+      styles.addButtonContainer,
       size === "sm" && {
         paddingHorizontal: 13,
         paddingVertical: 6,
@@ -23,7 +18,7 @@ const AppButton = ({ onPress, title, size, backgroundColor }) => (
       backgroundColor && { backgroundColor },
     ]}
   >
-    <Text style={[styles.appButtonText, size === "sm" && { fontSize: 18 }]}>
+    <Text style={[styles.addButtonText, size === "sm" && { fontSize: 18 }]}>
       {title}
     </Text>
   </TouchableOpacity>
@@ -48,14 +43,15 @@ const TodoMore = ({ data, setIsTodoModalOpen, setTodos }) => {
         >
           <Icon style={styles.iconClose} name="close" size={25}></Icon>
         </TouchableOpacity>
-        <Text style={styles.titleNew}>Créer un nouveau Todo</Text>
+        <View style={styles.closeIconContainer}></View>
+        <Text style={styles.titleNew}>Create a new Todo</Text>
         <TextInput
           style={styles.contentNew}
           onChangeText={(title) => setTitle(title)}
           placeholder="Description de votre Todo"
         />
-        <AppButton
-          title="Valider"
+        <AddButton
+          title="Validate"
           size="sm"
           backgroundColor="#fff"
           onPress={() => {
@@ -71,19 +67,19 @@ export default TodoMore;
 
 const styles = StyleSheet.create({
   maincontainer: {
-    alignContent: "center",
-  },
-  container: {
+    alignItems: "center",
+    position: "relative",
     width: "100%",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    padding: 25,
+    paddingTop: 32,
+    paddingBottom: 16,
+    paddingLeft: 16,
+    paddingRight: 16,
   },
   containerNew: {
-    width: "85%",
-    marginLeft: "auto",
-    marginRight: "auto",
+    width: "100%",
     alignItems: "center",
     borderColor: "#fff",
     backgroundColor: "#fff",
@@ -101,27 +97,26 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   titleNew: {
-    fontSize: 20,
+    fontSize: 24,
     paddingBottom: 20,
   },
   contentNew: {
-    fontSize: 18,
+    fontSize: 16,
     textAlign: "left",
     width: "100%",
-    paddingTop: 15,
-    paddingBottom: 50,
-    paddingLeft: 15,
+    minHeight: "80px",
     backgroundColor: "#f3f3f3",
     borderWidth: 1,
     borderRadius: 16,
     borderColor: "#fff",
+    height: "100%",
   },
   title: {
     fontWeight: "bold",
     fontSize: 24,
   },
-  appButtonContainer: {
-    marginTop: 20,
+  addButtonContainer: {
+    marginTop: 24,
     marginBottom: 10,
     borderColor: "#fff",
     backgroundColor: "#fff",
@@ -136,7 +131,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
   },
-  appButtonText: {
+  addButtonText: {
     paddingLeft: 6,
     paddingRight: 6,
     fontWeight: 400,
@@ -144,5 +139,11 @@ const styles = StyleSheet.create({
   containerIcon: {
     width: "100%",
     alignItems: "flex-end",
+  },
+  closeIconContainer: {
+    position: "absolute",
+    top: 16,
+    right: 16,
+    marginBottom: 8,
   },
 });

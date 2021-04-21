@@ -2,12 +2,12 @@ import React from "react";
 import { StyleSheet, View, Text, Image } from "react-native";
 import Photo from "../../../assets/Photo.png";
 
-const Post = ({ post }) => {
+const Post = ({ title, url }) => {
   return (
     <View style={styles.main_container}>
       <View style={styles.postContainer}>
-        <Image source={Photo} style={styles.roundedImage}></Image>
-        <Text style={styles.text}>{post.title}</Text>
+        <Image source={url} style={styles.roundedImage}></Image>
+        <Text style={styles.text}>{title}</Text>
       </View>
     </View>
   );
@@ -21,11 +21,11 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: "Roboto",
     fontWeight: "bold",
-    fontSize: 26,
+    fontSize: 24,
     marginBottom: 12,
   },
   text: {
-    fontSize: 20,
+    fontSize: 16,
     marginLeft: 12,
   },
   postContainer: {
@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: "space-between",
     alignItems: "center",
+    textAlign: "left",
     borderColor: "#fff",
     backgroundColor: "#fff",
     // borderWidth: 1,
@@ -48,8 +49,8 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   roundedImage: {
-    borderTopLeftRadius: "12px",
-    borderBottomLeftRadius: "12px",
+    borderTopLeftRadius: 12,
+    borderBottomLeftRadius: 12,
     backgroundSize: "unset",
     width: "50px",
     height: "100%",

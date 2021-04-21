@@ -1,17 +1,20 @@
 import React from "react";
 import { View, StyleSheet, Image, Text } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import ArrowIcon from "../../../assets/arrow.png";
 
-const Header = ({ title }) => {
+const Header = ({ title, action }) => {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <View style={styles.headerWrapper}>
-          <View>
-            <Image style={styles.iconContainer} source={ArrowIcon} />
+        <TouchableOpacity onPress={action}>
+          <View style={styles.headerWrapper}>
+            <View>
+              <Image style={styles.iconContainer} source={ArrowIcon} />
+            </View>
+            <Text>{title}</Text>
           </View>
-          <Text>{title}</Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
