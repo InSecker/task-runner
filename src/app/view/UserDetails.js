@@ -8,11 +8,11 @@ import EmailIcon from "../../../assets/Email.png";
 import PhoneIcon from "../../../assets/Phone.png";
 import MoreIcon from "../../../assets/More.png";
 import TodoList from "../../app/components/TodoList";
-import { fetchAPI } from "../utils/fetch";
+import { fetchAPI, orderTodos } from "../utils/helpers";
 
 const UserDetails = ({ route, navigation }) => {
   const { id, user } = route.params;
-  console.log(user);
+
   const [todos, setTodos] = useState([]);
   const [posts, setPosts] = useState([]);
   const [albums, setAlbums] = useState([]);
@@ -23,7 +23,9 @@ const UserDetails = ({ route, navigation }) => {
     for (var i = 0; i < 15; i++) {
       randomAlbumIds.push(Math.floor(Math.random() * 6) + 1);
     }
-    fetchAPI("/users/1/todos").then((result) => setTodos(result));
+    fetchAPI("/users/1/todos").then((result) => {
+      orderTodos(result, setTodos);
+    });
     fetchAPI(`/users/${id}/posts`).then((result) =>
       setPosts(result.slice(0, 4))
     );
@@ -31,6 +33,7 @@ const UserDetails = ({ route, navigation }) => {
       setAlbums(result.filter((album) => randomAlbumIds.includes(album.id)));
     });
   }, []);
+
   return (
     <View style={styles.container}>
       <Header
@@ -67,7 +70,7 @@ const UserDetails = ({ route, navigation }) => {
               isTodoModalOpen={isTodoModalOpen}
               setIsTodoModalOpen={setIsTodoModalOpen}
               setTodos={setTodos}
-              data={todos}
+              todos={todos}
             />
           )}
           <View style={styles.todoRow}>
@@ -82,10 +85,10 @@ const UserDetails = ({ route, navigation }) => {
           <View style={styles.todoRow}>
             <Text style={styles.todoTitle}>Albums</Text>
           </View>
-          {albums.map(({ title, url }) => {
+          {albums.map((album, i) => {
             return (
-              <View style={styles.post}>
-                <Album title={title} url={url}></Album>
+              <View style={styles.post} key={i}>
+                <Album album={album}></Album>
               </View>
             );
           })}

@@ -1,13 +1,12 @@
 import React from "react";
 import { StyleSheet, View, Text, Image } from "react-native";
-import Photo from "../../../assets/Photo.png";
 
-const Post = ({ title, url }) => {
+const Post = ({ album }) => {
   return (
     <View style={styles.main_container}>
       <View style={styles.postContainer}>
-        <Image source={url} style={styles.roundedImage}></Image>
-        <Text style={styles.text}>{title}</Text>
+        <Image source={album.url} style={styles.roundedImage}></Image>
+        <Text style={styles.text}>{album.title}</Text>
       </View>
     </View>
   );

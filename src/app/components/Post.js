@@ -25,13 +25,14 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   text: {
-    fontSize: 20,
+    fontSize: 16,
     marginLeft: 12,
+    textAlign: "left",
   },
   postContainer: {
     flexDirection: "row",
     width: "100%",
-    height: 50,
+    height: "auto",
     padding: 10,
     justifyContent: "space-between",
     alignItems: "center",

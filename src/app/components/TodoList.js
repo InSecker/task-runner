@@ -3,18 +3,21 @@ import { View } from "react-native";
 import TodoCard from "./TodoCard";
 import TodoMore from "./TodoMore";
 
-const TodoList = ({ data, isTodoModalOpen, setIsTodoModalOpen, setTodos }) => {
+const TodoList = ({ todos, isTodoModalOpen, setIsTodoModalOpen, setTodos }) => {
   return (
     <View>
       {isTodoModalOpen && (
         <TodoMore
-          data={data}
+          todos={todos}
           setIsTodoModalOpen={setIsTodoModalOpen}
           setTodos={setTodos}
         />
       )}
 
-      {data && data.map((user, i) => <TodoCard data={user} key={i} />)}
+      {todos &&
+        todos.map((user, i) => (
+          <TodoCard todos={todos} setTodos={setTodos} todo={user} key={i} />
+        ))}
     </View>
   );
 };

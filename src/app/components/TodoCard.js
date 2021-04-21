@@ -1,24 +1,34 @@
 import React from "react";
-import { Text } from "react-native";
-import { StyleSheet } from "react-native";
-import { Image } from "react-native";
-import { View } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { Icon } from "react-native-elements";
+import { orderTodos } from "../utils/helpers";
 
-const TodoCard = ({ data }) => {
+const TodoCard = ({ todo, todos, setTodos }) => {
+  const toggleCheckbox = () => {
+    const newTodos = todos.map((newTodo) => {
+      if (todo.id === newTodo.id) {
+        newTodo.completed = !newTodo.completed;
+        return newTodo;
+      }
+      return newTodo;
+    });
+    orderTodos(newTodos, setTodos);
+  };
   return (
     <View style={styles.main_container}>
       <View style={styles.todoContent}>
-        <Text style={styles.text}>{data.title}</Text>
-        {data.completed ? (
-          <Icon style={styles.icon} name="check-box" size={20}></Icon>
-        ) : (
-          <Icon
-            style={styles.icon}
-            name="check-box-outline-blank"
-            size={20}
-          ></Icon>
-        )}
+        <Text style={styles.text}>{todo.title}</Text>
+        <TouchableOpacity onPress={toggleCheckbox}>
+          {todo.completed ? (
+            <Icon style={styles.icon} name="check-box" size={20}></Icon>
+          ) : (
+            <Icon
+              style={styles.icon}
+              name="check-box-outline-blank"
+              size={20}
+            ></Icon>
+          )}
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -34,7 +44,7 @@ const styles = StyleSheet.create({
   },
   todoContent: {
     flexDirection: "row",
-    width: "85%",
+    width: "100%",
     height: "auto",
     justifyContent: "space-between",
     textAlign: "left",
