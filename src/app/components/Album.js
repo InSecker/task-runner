@@ -1,0 +1,59 @@
+import React from "react";
+import { StyleSheet, View, Text, Image } from "react-native";
+import Photo from "../../../assets/Photo.png";
+
+const Post = ({ post }) => {
+  return (
+    <View style={styles.main_container}>
+      <View style={styles.postContainer}>
+        <Image source={Photo} style={styles.roundedImage}></Image>
+        <Text style={styles.text}>{post.title}</Text>
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  main_container: {
+    flex: 1,
+    width: "100%",
+  },
+  title: {
+    fontFamily: "Roboto",
+    fontWeight: "bold",
+    fontSize: 26,
+    marginBottom: 12,
+  },
+  text: {
+    fontSize: 20,
+    marginLeft: 12,
+  },
+  postContainer: {
+    flexDirection: "row",
+    width: "100%",
+    height: 50,
+    justifyContent: "space-between",
+    alignItems: "center",
+    borderColor: "#fff",
+    backgroundColor: "#fff",
+    // borderWidth: 1,
+    borderRadius: 16,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  roundedImage: {
+    borderTopLeftRadius: "12px",
+    borderBottomLeftRadius: "12px",
+    backgroundSize: "unset",
+    width: "50px",
+    height: "100%",
+  },
+});
+
+export default Post;

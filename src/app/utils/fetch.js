@@ -1,9 +1,9 @@
 import { configuration as api } from "../../../config";
 
-export const fetchAPI = async () => {
+export const fetchAPI =  async (endpoint) => {
   try {
-    const response = await fetch(`${api.base_url}${api.endpoints.users}`);
-    return await response.json();
+    const response = await fetch(`${api.base_url}${endpoint}`);
+    return response.json();
   } catch (e) {
     console.error(e);
   }
