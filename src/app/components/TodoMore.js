@@ -29,25 +29,14 @@ const AppButton = ({ onPress, title, size, backgroundColor }) => (
   </TouchableOpacity>
 );
 
-const TodoMore = ({ data, setIsTodoModalOpen }) => {
-  const [todo, setTodo] = useState([]);
+const TodoMore = ({ data, setIsTodoModalOpen, setTodos }) => {
   const [title, setTitle] = useState("");
-  const [array, setArray] = useState([]);
-  const [newPosts, setPosts] = useState([]);
-
-  const getTodo = (todo) => {
-    console.log(todo);
-  };
 
   const setTodoOnData = (title) => {
     const todoToSave = { title };
-    // console.log(title);
-    // data.push(todoToSave);
-    // console.log(data);
-    const newPosts = [...data, todoToSave];
-    setPosts(newPosts);
-
-    console.log(newPosts);
+    const newTodos = [...data, todoToSave];
+    setTodos(newTodos);
+    setIsTodoModalOpen(false);
   };
 
   return (
