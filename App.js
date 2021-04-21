@@ -3,23 +3,29 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Home from "./src/app/view/Home";
 import UserDetails from "./src/app/view/UserDetails";
+import PostDetails from "./src/app/view/PostDetails";
 
 export default function App() {
-  const Stack = createStackNavigator();
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="UserDetails"
-          component={UserDetails}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+    const Stack = createStackNavigator();
+    return (
+        <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen
+                    name="Home"
+                    component={Home}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="UserDetails"
+                    component={UserDetails}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="PostDetails"
+                    component={PostDetails}
+                    options={{ headerShown: false }}
+                />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
 }
