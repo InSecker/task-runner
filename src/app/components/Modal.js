@@ -5,7 +5,7 @@ import { TouchableOpacity, View } from "react-native";
 import { StyleSheet } from "react-native";
 import { Icon } from "react-native-elements";
 
-const Modal = ({ title, action, placeholder, actionTitle, close }) => {
+const Modal = ({ title, action, placeholder, actionTitle, close, isError }) => {
   const [state, setState] = useState("");
 
   const Button = ({ onPress, title, size, backgroundColor }) => (
@@ -33,15 +33,16 @@ const Modal = ({ title, action, placeholder, actionTitle, close }) => {
         <View style={styles.mainContainer}>
           <View style={styles.containerNew}>
             <TouchableOpacity onPress={close} style={styles.containerIcon}>
-              <Icon style={styles.iconClose} name="close" size={25}></Icon>
+              <Icon name="close" size={16}/>
             </TouchableOpacity>
-            <View style={styles.closeIconContainer}></View>
+            <View style={styles.closeIconContainer}/>
             <Text style={styles.titleNew}>{title}</Text>
             <TextInput
               style={styles.contentNew}
               onChangeText={(state) => setState(state)}
               placeholder={placeholder}
             />
+            {isError ? <ErrorMessage/> : null}
             <Button
               title={actionTitle}
               size="sm"
@@ -51,10 +52,12 @@ const Modal = ({ title, action, placeholder, actionTitle, close }) => {
           </View>
         </View>
       </View>
-      <View style={styles.modalOverlay}></View>
+      <View style={styles.modalOverlay}/>
     </>
   );
 };
+
+const ErrorMessage = () => (<Text style={{ color:'red' }}>Value can't be empty !</Text>)
 
 export default Modal;
 
@@ -65,7 +68,6 @@ const styles = StyleSheet.create({
     top: 0,
     width: "100vw",
     height: "100vh",
-    zIndex: 0,
     flex: 1,
     alignItems: "center",
     justifyContent: "center",

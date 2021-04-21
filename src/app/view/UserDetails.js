@@ -18,6 +18,7 @@ const UserDetails = ({ route, navigation }) => {
   const [albums, setAlbums] = useState([]);
   const [isTodoModalOpen, setIsTodoModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false); // todo : add loader
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     const randomAlbumIds = [];
@@ -42,22 +43,32 @@ const UserDetails = ({ route, navigation }) => {
       .catch((err) => console.log(err));
   }, []);
 
-  const setTodoOnData = (todoToSave) => {
-    const newTodos = [{ title: todoToSave }, ...todos];
+  const setTodoOnData = (newTodo) => {
+      if (!newTodo){
+          setIsError(true);
+          return;
+      }
+    const newTodos = [{ title: newTodo }, ...todos];
     orderTodos(newTodos, setTodos);
     setIsTodoModalOpen(false);
   };
 
-  return (
+    const cleanStates = () => {
+        setIsTodoModalOpen(false);
+        setIsError(false)
+    }
+
+    return (
     <View style={styles.container}>
       {isTodoModalOpen && (
         <Modal
           title="Create a new Todo"
-          action={(todoData) => setTodoOnData(todoData)}
-          close={() => setIsTodoModalOpen(false)}
+          action={(newTodo) => setTodoOnData(newTodo)}
+          close={() => cleanStates()}
           placeholder="Enter your new todo"
           actionTitle="Validate"
-        ></Modal>
+          isError={isError}
+        />
       )}
       <Header action={() => navigation.navigate("Home")} title="Back to home" />
       <View style={styles.mapContainer} />
@@ -164,8 +175,8 @@ const styles = StyleSheet.create({
     marginRight: "8px",
   },
   icon: {
-    height: "16px",
-    width: "16px",
+    height: "12px",
+    width: "12px",
   },
   userInfo: {
     fontSize: "14px",

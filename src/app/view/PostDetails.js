@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from "react-native";
-import { Icon } from "react-native-elements";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Avatar } from "react-native-elements";
 import { fetchAPI } from "../utils/helpers";
 import Header from "../components/Header";
+import Modal from "../components/Modal";
+import MoreIcon from "../../../assets/More.png";
 
 
 const PostDetails = ({ navigation, route }) => {
-    const [ post, setPost ] = useState({});
-    const [ comments, setComments ] = useState([]);
+    const [post, setPost] = useState({});
+    const [comments, setComments] = useState([]);
+    const [isCommentModelOpen, setIsCommentModelOpen] = useState(false);
+    const [isError, setIsError] = useState(false);
     const { id, userId } = route.params;
 
     useEffect(() => {
@@ -15,6 +19,19 @@ const PostDetails = ({ navigation, route }) => {
         fetchAPI(`/posts/${id}/comments`).then((comments) => setComments(comments));
     }, [])
 
+    const cleanStates = () => {
+        setIsCommentModelOpen(false);
+        setIsError(false);
+    }
+    const setNewComment = (newComment) => {
+        if (!newComment){
+            setIsError(true);
+            return;
+        }
+        const newTodos = [{ body: newComment, id, userId }, ...comments];
+        setComments(newTodos);
+        setIsCommentModelOpen(false);
+    }
 
     return (
         <View style={styles.container}>
@@ -25,11 +42,22 @@ const PostDetails = ({ navigation, route }) => {
                 <Text>{post.body}</Text>
             </View>
 
+            {isCommentModelOpen && (
+                <Modal
+                    title="Post new comment"
+                    action={(newComment) => setNewComment(newComment)}
+                    close={() => cleanStates()}
+                    placeholder="Enter new comment"
+                    actionTitle="Validate"
+                    isError={isError}
+                />
+            )}
+
             <View style={styles.commentWrapper}>
                 <Text style={styles.title}>Comment</Text>
-                <View style={styles.icon}>
-                    <Text style={{ fontSize: 20 }}>+</Text>
-                </View>
+                <TouchableOpacity onPress={() => setIsCommentModelOpen(true)} style={styles.moreIcon}>
+                    <Image style={styles.icon} source={MoreIcon}/>
+                </TouchableOpacity>
             </View>
 
             {comments && comments.map((comment, i) => <Comment comment={comment} key={i}/>)}
@@ -41,12 +69,12 @@ const PostDetails = ({ navigation, route }) => {
 const Comment = ({ comment }) => (
     <View style={styles.postWrapper}>
         <View style={styles.postContainer}>
-            <View style={{ flexDirection: 'row', justifyContent: 'flex-start', flex: 1, alignItems: 'center' }}>
-                <Icon name='person' size={30}/>
+            <View style={{ flexDirection: 'row', justifyContent: 'flex-start', flex: 1, alignItems: 'center', paddingLeft: 10 }}>
+                <Avatar source={{ uri: 'https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/3_avatar-512.png' }}/>
                 <Text style={styles.text}>John Doe</Text>
             </View>
             <View>
-                <Text>{comment.body.slice(0, 50)}</Text>
+                <Text style={{ paddingLeft: 10, paddingTop: 10, width: '100%', flex: 1 }} numberOfLines={2}>{comment.body}</Text>
             </View>
         </View>
     </View>
@@ -64,6 +92,7 @@ const styles = StyleSheet.create({
     },
     commentWrapper: {
         flex: 1,
+        marginBottom: 20,
         marginTop: 20,
         width: '90%',
         margin: 'auto',
@@ -78,40 +107,40 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     icon: {
-        borderWidth: 1,
-        borderRadius: 5,
-        borderColor: "#fff",
-        paddingHorizontal: 10,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 3,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5,
+        height: "12px",
+        width: "12px",
+    },
+    moreIcon: {
+        maxWidth: "32px",
+        height: "32px",
+        borderRadius: 8,
+        backgroundColor: "white",
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
     },
     postContainer: {
         flexDirection: 'column',
-        padding: 10,
+        padding: 20,
         marginBottom: 15,
-        height: 100,
-        borderColor: '#fff',
-        backgroundColor: '#fff',
+        minHeight: 80,
+        borderColor: '#FFF',
+        backgroundColor: '#FFF',
         borderWidth: 1,
         borderRadius: 16,
         paddingHorizontal: 10,
-        shadowColor: "#000",
+        shadowColor: "#F4F4F4",
         shadowOffset: {
             width: 0,
             height: 3,
         },
         shadowOpacity: 0.25,
         shadowRadius: 4,
-        elevation: 5,
+        elevation: 4,
     },
     text: {
-        marginLeft: 10
+        marginLeft: 10,
+        fontWeight: 'bold'
     }
 });
 
