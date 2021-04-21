@@ -50,6 +50,7 @@ const UserDetails = ({}) => {
             <TodoList
               isTodoModalOpen={isTodoModalOpen}
               setIsTodoModalOpen={setIsTodoModalOpen}
+              setTodos={setTodos}
               data={todos}
             />
           )}
