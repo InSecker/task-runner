@@ -1,38 +1,45 @@
-import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Text, Image, TouchableOpacity } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Header from "../components/Header";
 import Post from "../components/Post";
 import Album from "../components/Album";
 import Modal from "../components/Modal";
+import TodoList from "../../app/components/TodoList";
 import CompanyIcon from "../../../assets/Company.png";
 import EmailIcon from "../../../assets/Email.png";
 import PhoneIcon from "../../../assets/Phone.png";
 import MoreIcon from "../../../assets/More.png";
-import TodoList from "../../app/components/TodoList";
 import { fetchAPI, orderTodos } from "../utils/helpers";
 
 const UserDetails = ({ route, navigation }) => {
   const { id, user } = route.params;
-
   const [todos, setTodos] = useState([]);
   const [posts, setPosts] = useState([]);
   const [albums, setAlbums] = useState([]);
   const [isTodoModalOpen, setIsTodoModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // todo : add loader
 
   useEffect(() => {
     const randomAlbumIds = [];
-    for (var i = 0; i < 15; i++) {
+    setIsLoading(true);
+    for (let i = 0; i < 15; i++) {
       randomAlbumIds.push(Math.floor(Math.random() * 6) + 1);
     }
-    fetchAPI("/users/1/todos").then((result) => {
-      orderTodos(result, setTodos);
-    });
-    fetchAPI(`/users/${id}/posts`).then((result) =>
-      setPosts(result.slice(0, 4))
-    );
-    fetchAPI("/photos").then((result) => {
-      setAlbums(result.filter((album) => randomAlbumIds.includes(album.id)));
-    });
+
+    Promise.all([
+      fetchAPI(`/users/${id}/todos`),
+      fetchAPI(`/users/${id}/posts`),
+      fetchAPI("/photos"),
+    ])
+      .then(([resTodos, resPosts, resAlbums]) => {
+        orderTodos(resTodos, setTodos);
+        setPosts(resPosts.slice(0, 4));
+        setAlbums(
+          resAlbums.filter((album) => randomAlbumIds.includes(album.id))
+        );
+        setIsLoading(false);
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   const setTodoOnData = (todoToSave) => {
@@ -52,26 +59,14 @@ const UserDetails = ({ route, navigation }) => {
           actionTitle="Validate"
         ></Modal>
       )}
-      <Header
-        action={() => navigation.navigate("Home")}
-        title="Back to home"
-      ></Header>
-      <View style={styles.mapContainer}></View>
+      <Header action={() => navigation.navigate("Home")} title="Back to home" />
+      <View style={styles.mapContainer} />
       <View style={styles.userContainer}>
         <Text style={styles.name}>{user?.name}</Text>
         <View style={styles.wrapper}>
-          <View style={styles.userInfoRow}>
-            <Image style={styles.userInfoIcon} source={CompanyIcon} />
-            <Text style={styles.userInfo}>{user?.company.name}</Text>
-          </View>
-          <View style={styles.userInfoRow}>
-            <Image style={styles.userInfoIcon} source={EmailIcon} />
-            <Text style={styles.userInfo}>{user?.email}</Text>
-          </View>
-          <View style={styles.userInfoRow}>
-            <Image style={styles.userInfoIcon} source={PhoneIcon} />
-            <Text style={styles.userInfo}>{user?.phone}</Text>
-          </View>
+          <InformationRowIcon value={user?.company.name} icon={CompanyIcon} />
+          <InformationRowIcon value={user?.email} icon={EmailIcon} />
+          <InformationRowIcon value={user?.phone} icon={PhoneIcon} />
           <View style={styles.todoRow}>
             <Text style={styles.todoTitle}>To do list</Text>
             <TouchableOpacity
@@ -94,33 +89,37 @@ const UserDetails = ({ route, navigation }) => {
           </View>
           {posts &&
             posts.map((post, i) => (
-              <View key={i} style={styles.post}>
-                <Post navigation={navigation} post={post} />
+              <View style={styles.post} key={i}>
+                <Post navigation={navigation} post={post} userId={id} />
               </View>
             ))}
           <View style={styles.todoRow}>
             <Text style={styles.todoTitle}>Albums</Text>
           </View>
-          {albums.map((album, i) => {
-            return (
+          {albums &&
+            albums.map((album, i) => (
               <View style={styles.post} key={i}>
-                <Album album={album}></Album>
+                <Album album={album} />
               </View>
-            );
-          })}
+            ))}
         </View>
       </View>
     </View>
   );
 };
 
+const InformationRowIcon = ({ value, icon }) => (
+  <View style={styles.userInfoRow}>
+    <Image style={styles.userInfoIcon} source={icon} />
+    <Text style={styles.userInfo}>{value}</Text>
+  </View>
+);
 export default UserDetails;
 
 const styles = StyleSheet.create({
   container: {
     height: "auto",
     width: "100%",
-    position: "relative",
   },
   wrapper: {
     flex: 1,

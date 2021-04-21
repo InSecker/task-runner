@@ -1,15 +1,20 @@
 import React from "react";
-import { StyleSheet, TextInput, View, Text } from "react-native";
+import { StyleSheet, TextInput, View, Text, TouchableHighlight } from "react-native";
 import { Icon } from "react-native-elements";
 
-const Post = ({ post }) => {
+const Post = ({ post, navigation, userId }) => {
   return (
+      <TouchableHighlight
+          onPress={() => navigation.navigate("PostDetails", { id: post.id, userId })}
+          underlayColor={"transparent"}
+      >
     <View style={styles.main_container}>
       <View style={styles.postContainer}>
         <Text style={styles.text}>{post.title}</Text>
         <Icon name="keyboard-arrow-right" size={30} />
       </View>
     </View>
+      </TouchableHighlight>
   );
 };
 

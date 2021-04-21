@@ -1,34 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { Button, StyleSheet, Text, View } from "react-native";
-import { configuration as api } from "../../../config";
+import { StyleSheet, Text, View } from "react-native";
 import { Icon } from "react-native-elements";
+import { fetchAPI } from "../utils/helpers";
+import Header from "../components/Header";
 
 
 const PostDetails = ({ navigation, route }) => {
     const [ post, setPost ] = useState({});
     const [ comments, setComments ] = useState([]);
-    const { id } = route.params;
+    const { id, userId } = route.params;
 
     useEffect(() => {
-        fetch(`https://jsonplaceholder.typicode.com/users/${id}/posts`)
-            .then((response) => response.json())
-            .then((post) => {
-                setPost(post[5])
-            });
-
-        fetch(`https://jsonplaceholder.typicode.com/posts/${id}/comments`)
-            .then((response) => response.json())
-            .then((comments) => {
-                console.log('comments : ', comments);
-                setComments(comments);
-            });
+        fetchAPI(`/posts/${id}`).then((post) => setPost(post));
+        fetchAPI(`/posts/${id}/comments`).then((comments) => setComments(comments));
     }, [])
 
 
     return (
         <View style={styles.container}>
+            <Header action={() => navigation.navigate("UserDetails", { id: userId })} title="Back to user"/>
+            <View style={{ height: 80 }}/>
             <View style={styles.postWrapper}>
-                <Text style={styles.title}>T{post.title}</Text>
+                <Text style={styles.title}>{post.title}</Text>
                 <Text>{post.body}</Text>
             </View>
 
@@ -61,20 +54,20 @@ const Comment = ({ comment }) => (
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#fff'
+        backgroundColor: '#F4F4F4'
     },
     postWrapper: {
         flex: 1,
         width: '90%',
+        backgroundColor: '#F4F4F4',
         margin: 'auto',
-        backgroundColor: 'white'
     },
     commentWrapper: {
         flex: 1,
         marginTop: 20,
         width: '90%',
         margin: 'auto',
-        backgroundColor: 'white',
+        backgroundColor: '#F4F4F4',
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
@@ -101,6 +94,7 @@ const styles = StyleSheet.create({
     postContainer: {
         flexDirection: 'column',
         padding: 10,
+        marginBottom: 15,
         height: 100,
         borderColor: '#fff',
         backgroundColor: '#fff',
