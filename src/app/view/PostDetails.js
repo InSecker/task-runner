@@ -35,11 +35,10 @@ const PostDetails = ({ navigation, route }) => {
 
     return (
         <View style={styles.container}>
-            <ScrollView>
-                <View style={{ width: '85%', justifyContent: 'center', flex: 1 }}>
-                    <Header action={() => navigation.navigate("UserDetails", { id: userId })} title="Back to user"/>
-                    <View style={{ height: 80 }}/>
-                    <View style={{ alignContent: "center", width: '85%' }}>
+            <ScrollView style={styles.scrollview}>
+                <Header action={() => navigation.navigate("UserDetails", { id: userId })} title="Back to user"/>
+                <View style={styles.maincontainer}>
+                    <View style={styles.commentsTitle}>
                         <Text style={styles.title}>{post.title}</Text>
                         <Text>{post.body}</Text>
                     </View>
@@ -61,8 +60,12 @@ const PostDetails = ({ navigation, route }) => {
                             <Image style={styles.icon} source={MoreIcon}/>
                         </TouchableOpacity>
                     </View>
-
-                    {comments && comments.map((comment, i) => <Comment comment={comment} key={i}/>)}
+                    {comments &&
+                        comments.map((comment, i) => (
+                            <View style={styles.allComments} key={i}>
+                                <Comment comment={comment}/>
+                            </View>
+                        ))}
                 </View>
             </ScrollView>
         </View>
@@ -73,12 +76,12 @@ const PostDetails = ({ navigation, route }) => {
 const Comment = ({ comment }) => (
     <View style={styles.postWrapper}>
         <View style={styles.postContainer}>
-            <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', paddingLeft: 10 }}>
+            <View style={styles.infoContainer}>
                 <Avatar source={{ uri: 'https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/3_avatar-512.png' }}/>
                 <Text style={styles.text}>John Doe</Text>
             </View>
-            <View>
-                <Text style={{ paddingLeft: 10, paddingTop: 10, width: '100%', flex: 1 }} numberOfLines={2}>{comment.body}</Text>
+            <View style={styles.commentContainer}>
+                <Text style={styles.commentText} numberOfLines={2}>{comment.body}</Text>
             </View>
         </View>
     </View>
@@ -86,32 +89,40 @@ const Comment = ({ comment }) => (
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#F4F4F4',
-        justifyContent: 'center',
-        flex: 1,
         width: '100%',
+        height: "100%",
+        alignContent: "center",
+        backgroundColor: '#F4F4F4',
+    },
+    scrollview: {
+        width: "100%",
+    },
+    maincontainer:{
+        width: "100%",
+        textAlign:  'center',
+        marginTop: 80,
     },
     postWrapper: {
         // flex: 1,
         //alignItems: 'center',
         width: '100%',
         backgroundColor: '#F4F4F4',
+        alignContent: "center",
     },
     commentWrapper: {
         // flex: 1,
-        alignContent: "center",
+        width: "85%",
+        alignSelf: "center",
         marginBottom: 20,
         marginTop: 20,
-        width: '90%',
         backgroundColor: '#F4F4F4',
         flexDirection: "row",
         justifyContent: "space-between",
-        alignItems: "center",
     },
     title: {
         fontSize: 26,
         marginBottom: 10,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
     },
     icon: {
         height: 12,
@@ -127,6 +138,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     postContainer: {
+        width: "100%",
         flexDirection: 'column',
         padding: 20,
         marginBottom: 15,
@@ -147,7 +159,33 @@ const styles = StyleSheet.create({
     },
     text: {
         marginLeft: 10,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        lineHeight: 35,
+    },
+    infoContainer: {
+        width: "100%",
+        alignContent: "center",
+        flexDirection: 'row', 
+        justifyContent: 'flex-start',
+        paddingLeft: 10,
+    },
+    commentContainer: {
+        width: "100%",
+        alignContent: "center",
+    },
+    commentText: {
+        width: "90%",
+        alignSelf: "center",
+        marginTop: 5,
+    },
+    commentsTitle: {
+        width: "85%",
+        alignSelf: "center",
+        marginBottom: 16,
+    },
+    allComments: {
+        width: "85%",
+        alignSelf: "center",
     }
 });
 
