@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  ActivityIndicator,
+} from "react-native";
 import Header from "../components/Header";
 import Post from "../components/Post";
 import Album from "../components/Album";
@@ -44,21 +51,25 @@ const UserDetails = ({ route, navigation }) => {
   }, []);
 
   const setTodoOnData = (newTodo) => {
-      if (!newTodo){
-          setIsError(true);
-          return;
-      }
+    if (!newTodo) {
+      setIsError(true);
+      return;
+    }
     const newTodos = [{ title: newTodo }, ...todos];
     orderTodos(newTodos, setTodos);
     setIsTodoModalOpen(false);
   };
 
-    const cleanStates = () => {
-        setIsTodoModalOpen(false);
-        setIsError(false)
-    }
+  const cleanStates = () => {
+    setIsTodoModalOpen(false);
+    setIsError(false);
+  };
 
-    return (
+  return isLoading ? (
+    <View style={styles.loaderContainer}>
+      <ActivityIndicator size="large" color="#618985" />
+    </View>
+  ) : (
     <View style={styles.container}>
       {isTodoModalOpen && (
         <Modal
@@ -132,17 +143,24 @@ const styles = StyleSheet.create({
     height: "auto",
     width: "100%",
   },
+  loaderContainer: {
+    width: "100vw",
+    height: "100vh",
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   wrapper: {
     flex: 1,
     alignItems: "center",
     flexDirection: "column",
-    marginTop: "16px"
+    marginTop: "16px",
   },
   mapContainer: {
     width: "100%",
     height: "250px",
     backgroundColor: "grey",
-    opacity: 0.4
+    opacity: 0.4,
   },
   userContainer: {
     width: "330px",
