@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
+import { StyleSheet, Text, View, TouchableHighlight, Image } from "react-native";
+import { Avatar } from "react-native-elements";
 
 const UserCard = ({ user, navigation }) => {
   const { name } = user;
@@ -11,7 +12,9 @@ const UserCard = ({ user, navigation }) => {
       underlayColor={"transparent"}
     >
       <View style={styles.container}>
-        <View style={{ marginBottom: 15 }}></View>
+        <View style={{ marginBottom: 15 }}>
+            <Image source={require('../../../assets/UserIcon.png')} />
+        </View>
         <Text style={styles.firstname}>{firstname}</Text>
         <Text style={styles.lastname}>{lastname}</Text>
       </View>

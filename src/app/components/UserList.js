@@ -8,7 +8,7 @@ const UserList = ({ users, navigation }) => {
     return (
         <SafeAreaView>
             <View style={styles.container}>
-                <View style={{ height: 160 }}>
+                <View style={{ height: 160, marginBottom:20  }}>
                     <ScrollView horizontal>
                         <View style={styles.list}>
                             {users && users.map((user, i) => (

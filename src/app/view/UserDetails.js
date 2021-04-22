@@ -35,7 +35,7 @@ const UserDetails = ({ route, navigation }) => {
             fetchAPI("/photos"),
         ])
             .then(([resTodos, resPosts, resAlbums]) => {
-                orderTodos(resTodos, setTodos);
+                orderTodos(resTodos.slice(0, 3), setTodos);
                 setPosts(resPosts.slice(0, 4));
                 setAlbums(
                     resAlbums.filter((album) => randomAlbumIds.includes(album.id))
@@ -46,7 +46,7 @@ const UserDetails = ({ route, navigation }) => {
     }, []);
 
     const setTodoOnData = (newTodo) => {
-        if (!newTodo){
+        if (!newTodo) {
             setIsError(true);
             return;
         }
@@ -61,40 +61,40 @@ const UserDetails = ({ route, navigation }) => {
     }
 
     return (
-          <View style={styles.container}>
+        <View style={styles.container}>
             <ScrollView style={styles.scrollview}>
-              {isTodoModalOpen && (
-                  <Modal
-                      title="Create a new Todo"
-                      action={(newTodo) => setTodoOnData(newTodo)}
-                      close={() => cleanStates()}
-                      placeholder="Enter your new todo"
-                      actionTitle="Validate"
-                      isError={isError}
-                  />
-              )}
-              <View style={styles.mapContainer}>
-                  <MapView style={[StyleSheet.absoluteFillObject]}  initialRegion={{
-                      latitude: 37.78825,
-                      longitude: -121.4324,
-                      latitudeDelta: 0.0922,
-                      longitudeDelta: 0.0421
-                  }}/>
-              </View>
-              <Header action={() => navigation.navigate("Home")} title="Back to home" />
+                {isTodoModalOpen && (
+                    <Modal
+                        title="Create a new Todo"
+                        action={(newTodo) => setTodoOnData(newTodo)}
+                        close={() => cleanStates()}
+                        placeholder="Enter your new todo"
+                        actionTitle="Validate"
+                        isError={isError}
+                    />
+                )}
+                <View style={styles.mapContainer}>
+                    <MapView style={[StyleSheet.absoluteFillObject]} initialRegion={{
+                        latitude: 37.78825,
+                        longitude: -121.4324,
+                        latitudeDelta: 0.0922,
+                        longitudeDelta: 0.0421
+                    }}/>
+                </View>
+                <Header action={() => navigation.navigate("Home")} title="Back to home"/>
                 <View style={styles.userContainer}>
                     <Text style={styles.name}>{user?.name}</Text>
                     <View style={styles.wrapper}>
-                        <InformationRowIcon value={user?.company.name} icon={CompanyIcon} />
-                        <InformationRowIcon value={user?.email} icon={EmailIcon} />
-                        <InformationRowIcon value={user?.phone} icon={PhoneIcon} />
+                        <InformationRowIcon value={user?.company.name} icon={CompanyIcon}/>
+                        <InformationRowIcon value={user?.email} icon={EmailIcon}/>
+                        <InformationRowIcon value={user?.phone} icon={PhoneIcon}/>
                         <View style={styles.todoRow}>
                             <Text style={styles.todoTitle}>To do list</Text>
                             <TouchableOpacity
                                 onPress={() => setIsTodoModalOpen(true)}
                                 style={styles.moreIcon}
                             >
-                                <Image style={styles.icon} source={MoreIcon} />
+                                <Image style={styles.icon} source={MoreIcon}/>
                             </TouchableOpacity>
                         </View>
                         {todos && (
@@ -111,7 +111,7 @@ const UserDetails = ({ route, navigation }) => {
                         {posts &&
                         posts.map((post, i) => (
                             <View style={styles.posts} key={i}>
-                                <Post navigation={navigation} post={post} userId={id} />
+                                <Post navigation={navigation} post={post} userId={id}/>
                             </View>
                         ))}
                         <View style={styles.todoRow}>
@@ -120,19 +120,19 @@ const UserDetails = ({ route, navigation }) => {
                         {albums &&
                         albums.map((album, i) => (
                             <View style={styles.posts} key={i}>
-                                <Album album={album} />
+                                <Album album={album}/>
                             </View>
                         ))}
                     </View>
                 </View>
-              </ScrollView>
-          </View>
+            </ScrollView>
+        </View>
     );
 };
 
 const InformationRowIcon = ({ value, icon }) => (
     <View style={styles.userInfoRow}>
-        <Image style={styles.userInfoIcon} source={icon} />
+        <Image style={styles.userInfoIcon} source={icon}/>
         <Text style={styles.userInfo}>{value}</Text>
     </View>
 );
@@ -159,12 +159,13 @@ const styles = StyleSheet.create({
         textAlign: "center",
     },
     name: {
+        top: -40,
+        alignContent: "center",
         position: 'absolute',
-        top: -80,
-        left: 5,
+        textAlign: "center",
         fontWeight: "bold",
         fontSize: 32,
-        // fontFamily: "sans-serif",
+        width: "100%"
     },
     userInfoRow: {
         width: "100%",
@@ -189,7 +190,7 @@ const styles = StyleSheet.create({
         // fontFamily: "sans-serif",
     },
     posts: {
-        width: "90%",
+        width: "85%",
         alignContent: "center",
         marginBottom: 16,
     },
@@ -198,8 +199,9 @@ const styles = StyleSheet.create({
     },
     todoRow: {
         width: "100%",
-        paddingLeft: 10,
-        paddingRight: 10,
+        paddingLeft: 35,
+        paddingRight: 35,
+        marginTop: 25,
         flexDirection: "row",
         justifyContent: "space-between",
         marginBottom: 18,
@@ -219,7 +221,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     scrollview: {
-      width: "100%",
-      position: "relative",
+        width: "100%",
+        position: "relative",
     },
 });
