@@ -1,10 +1,10 @@
 import React from "react";
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import TodoCard from "./TodoCard";
 
 const TodoList = ({ todos, setTodos }) => {
   return (
-    <View>
+    <View style={styles.container}>
       {todos &&
         todos.map((user, i) => (
           <TodoCard todos={todos} setTodos={setTodos} todo={user} key={i} />
@@ -14,3 +14,9 @@ const TodoList = ({ todos, setTodos }) => {
 };
 
 export default TodoList;
+
+const styles = StyleSheet.create({
+    container: {
+      width: "90%",
+    },
+});

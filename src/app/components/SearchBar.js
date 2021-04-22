@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
         flex: 1,
         width: "90%",
         position: "absolute",
-        bottom: 180
+        bottom: "25%",
     },
     textinput: {
         height: 50,

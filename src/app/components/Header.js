@@ -24,23 +24,19 @@ export default Header;
 
 const styles = StyleSheet.create({
   container: {
-    position: "absolute",
-    left: 0,
-    top: 0,
     width: "100%",
-    height: 60,
-    // fontFamily: "sans-serif",
-    zIndex: 10,
+    position: "absolute",
+    top: 50,
+    left: -5,
   },
   headerContainer: {
-    flex: 1,
+    width: "100%",
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "flex-end",
   },
   headerWrapper: {
     width: "100%",
-    flex: 1,
     flexDirection: "row",
     alignItems: "center",
   },

@@ -10,7 +10,8 @@ import EmailIcon from "../../../assets/Email.png";
 import PhoneIcon from "../../../assets/Phone.png";
 import MoreIcon from "../../../assets/More.png";
 import { fetchAPI, orderTodos } from "../utils/helpers";
-// import MapView from "react-native-maps";
+import MapView from "react-native-maps";
+import { ScrollView } from "react-native-gesture-handler";
 
 const UserDetails = ({ route, navigation }) => {
     const { id, user } = route.params;
@@ -60,70 +61,72 @@ const UserDetails = ({ route, navigation }) => {
     }
 
     return (
-        <View style={styles.container}>
-            {isTodoModalOpen && (
-                <Modal
-                    title="Create a new Todo"
-                    action={(newTodo) => setTodoOnData(newTodo)}
-                    close={() => cleanStates()}
-                    placeholder="Enter your new todo"
-                    actionTitle="Validate"
-                    isError={isError}
-                />
-            )}
-            <Header action={() => navigation.navigate("Home")} title="Back to home" />
-            {/* <View style={styles.mapContainer}>
-                <MapView style={[StyleSheet.absoluteFillObject]}  initialRegion={{
-                    latitude: 37.78825,
-                    longitude: -121.4324,
-                    latitudeDelta: 0.0922,
-                    longitudeDelta: 0.0421
-                }}/>
-            </View> */}
-            <View style={styles.userContainer}>
-                <Text style={styles.name}>{user?.name}</Text>
-                <View style={styles.wrapper}>
-                    <InformationRowIcon value={user?.company.name} icon={CompanyIcon} />
-                    <InformationRowIcon value={user?.email} icon={EmailIcon} />
-                    <InformationRowIcon value={user?.phone} icon={PhoneIcon} />
-                    <View style={styles.todoRow}>
-                        <Text style={styles.todoTitle}>To do list</Text>
-                        <TouchableOpacity
-                            onPress={() => setIsTodoModalOpen(true)}
-                            style={styles.moreIcon}
-                        >
-                            <Image style={styles.icon} source={MoreIcon} />
-                        </TouchableOpacity>
-                    </View>
-                    {todos && (
-                        <TodoList
-                            isTodoModalOpen={isTodoModalOpen}
-                            setIsTodoModalOpen={setIsTodoModalOpen}
-                            setTodos={setTodos}
-                            todos={todos}
-                        />
-                    )}
-                    <View style={styles.todoRow}>
-                        <Text style={styles.todoTitle}>Posts</Text>
-                    </View>
-                    {posts &&
-                    posts.map((post, i) => (
-                        <View style={styles.post} key={i}>
-                            <Post navigation={navigation} post={post} userId={id} />
+          <View style={styles.container}>
+            <ScrollView style={styles.scrollview}>
+              {isTodoModalOpen && (
+                  <Modal
+                      title="Create a new Todo"
+                      action={(newTodo) => setTodoOnData(newTodo)}
+                      close={() => cleanStates()}
+                      placeholder="Enter your new todo"
+                      actionTitle="Validate"
+                      isError={isError}
+                  />
+              )}
+              <View style={styles.mapContainer}>
+                  <MapView style={[StyleSheet.absoluteFillObject]}  initialRegion={{
+                      latitude: 37.78825,
+                      longitude: -121.4324,
+                      latitudeDelta: 0.0922,
+                      longitudeDelta: 0.0421
+                  }}/>
+              </View>
+              <Header action={() => navigation.navigate("Home")} title="Back to home" />
+                <View style={styles.userContainer}>
+                    <Text style={styles.name}>{user?.name}</Text>
+                    <View style={styles.wrapper}>
+                        <InformationRowIcon value={user?.company.name} icon={CompanyIcon} />
+                        <InformationRowIcon value={user?.email} icon={EmailIcon} />
+                        <InformationRowIcon value={user?.phone} icon={PhoneIcon} />
+                        <View style={styles.todoRow}>
+                            <Text style={styles.todoTitle}>To do list</Text>
+                            <TouchableOpacity
+                                onPress={() => setIsTodoModalOpen(true)}
+                                style={styles.moreIcon}
+                            >
+                                <Image style={styles.icon} source={MoreIcon} />
+                            </TouchableOpacity>
                         </View>
-                    ))}
-                    <View style={styles.todoRow}>
-                        <Text style={styles.todoTitle}>Albums</Text>
-                    </View>
-                    {albums &&
-                    albums.map((album, i) => (
-                        <View style={styles.post} key={i}>
-                            <Album album={album} />
+                        {todos && (
+                            <TodoList
+                                isTodoModalOpen={isTodoModalOpen}
+                                setIsTodoModalOpen={setIsTodoModalOpen}
+                                setTodos={setTodos}
+                                todos={todos}
+                            />
+                        )}
+                        <View style={styles.todoRow}>
+                            <Text style={styles.todoTitle}>Posts</Text>
                         </View>
-                    ))}
+                        {posts &&
+                        posts.map((post, i) => (
+                            <View style={styles.posts} key={i}>
+                                <Post navigation={navigation} post={post} userId={id} />
+                            </View>
+                        ))}
+                        <View style={styles.todoRow}>
+                            <Text style={styles.todoTitle}>Albums</Text>
+                        </View>
+                        {albums &&
+                        albums.map((album, i) => (
+                            <View style={styles.posts} key={i}>
+                                <Album album={album} />
+                            </View>
+                        ))}
+                    </View>
                 </View>
-            </View>
-        </View>
+              </ScrollView>
+          </View>
     );
 };
 
@@ -137,11 +140,11 @@ export default UserDetails;
 
 const styles = StyleSheet.create({
     container: {
-        height: "auto",
         width: "100%",
+        alignContent: "center",
     },
     wrapper: {
-        flex: 1,
+        width: '100%',
         alignItems: "center",
         flexDirection: "column",
         marginTop: 16,
@@ -149,20 +152,16 @@ const styles = StyleSheet.create({
     mapContainer: {
         width: "100%",
         height: 250,
-        opacity: 0.8
+        opacity: 0.9,
     },
     userContainer: {
-        width: 330,
-        height: "auto",
-        position: "absolute",
-        top: 200,
-        marginLeft: "auto",
-        marginRight: "auto",
-        left: 0,
-        right: 0,
+        width: "100%",
         textAlign: "center",
     },
     name: {
+        position: 'absolute',
+        top: -80,
+        left: 5,
         fontWeight: "bold",
         fontSize: 32,
         // fontFamily: "sans-serif",
@@ -170,7 +169,6 @@ const styles = StyleSheet.create({
     userInfoRow: {
         width: "100%",
         height: 16,
-        flex: 1,
         flexDirection: "row",
         maxHeight: 16,
         justifyContent: "center",
@@ -191,18 +189,17 @@ const styles = StyleSheet.create({
         // fontFamily: "sans-serif",
     },
     posts: {
-        width: "100%",
-        flex: 1,
-        flexDirection: "column",
-        alignItems: "center",
+        width: "90%",
+        alignContent: "center",
+        marginBottom: 16,
     },
     post: {
         width: "100%",
-        marginBottom: 16,
     },
     todoRow: {
         width: "100%",
-        flex: 1,
+        paddingLeft: 10,
+        paddingRight: 10,
         flexDirection: "row",
         justifyContent: "space-between",
         marginBottom: 18,
@@ -220,5 +217,9 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
+    },
+    scrollview: {
+      width: "100%",
+      position: "relative",
     },
 });

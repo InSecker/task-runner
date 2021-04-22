@@ -5,7 +5,7 @@ const Post = ({ album }) => {
   return (
     <View style={styles.main_container}>
       <View style={styles.postContainer}>
-        <Image source={album.url} style={styles.roundedImage}></Image>
+        <Image /*source={album.url}*/ style={styles.roundedImage}></Image>
         <Text style={styles.text}>{album.title}</Text>
       </View>
     </View>
@@ -14,7 +14,6 @@ const Post = ({ album }) => {
 
 const styles = StyleSheet.create({
   main_container: {
-    flex: 1,
     width: "100%",
   },
   title: {
@@ -24,6 +23,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   text: {
+    width: "80%",
     fontSize: 16,
     marginLeft: 12,
   },

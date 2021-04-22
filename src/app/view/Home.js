@@ -3,7 +3,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 import { configuration as api } from "../../../config";
 import { fetchAPI } from "../utils/helpers";
-// import  Map  from "../components/Map";
+import  Map  from "../components/Map";
 import UserList from "../components/UserList";
 import SearchBar from "../components/SearchBar";
 
@@ -27,7 +27,7 @@ const Home = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      {/* <Map style={{ flex: 1, backgroundColor: 'red' }} users={users}/> */}
+      <Map style={{ flex: 1, backgroundColor: 'red' }} users={users}/>
       <StatusBar style="auto" />
       <SearchBar
         searchText={searchText}

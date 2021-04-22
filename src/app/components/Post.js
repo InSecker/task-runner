@@ -19,7 +19,6 @@ const Post = ({ post, navigation, userId }) => {
 
 const styles = StyleSheet.create({
     main_container: {
-        flex: 1,
         width: "100%",
     },
     title: {
@@ -29,6 +28,7 @@ const styles = StyleSheet.create({
         marginBottom: 12,
     },
     text: {
+        width: "80%",
         fontSize: 16,
         marginLeft: 12,
         textAlign: "left",
@@ -36,7 +36,6 @@ const styles = StyleSheet.create({
     postContainer: {
         flexDirection: "row",
         width: "100%",
-        height: "auto",
         padding: 10,
         justifyContent: "space-between",
         alignItems: "center",

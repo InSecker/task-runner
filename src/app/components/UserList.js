@@ -24,10 +24,10 @@ const UserList = ({ users, navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
-        width: "100%"
+        width: "100%",
     },
     list: {
-        flexDirection: 'row'
+        flexDirection: 'row',
     }
 });
 
