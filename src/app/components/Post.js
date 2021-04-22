@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         width: "100%",
     },
     title: {
-        fontFamily: "Roboto",
+        // fontFamily: "Roboto",
         fontWeight: "bold",
         fontSize: 26,
         marginBottom: 12,

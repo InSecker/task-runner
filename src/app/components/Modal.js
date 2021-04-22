@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     zIndex: 11,
-    overflowY: "hidden",
+    // overflowY: "hidden",
   },
   modalOverlay: {
     position: "absolute",
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     zIndex: 10,
-    overflowY: "hidden",
+    // overflowY: "hidden",
   },
   mainContainer: {
     alignItems: "center",
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
   addButtonText: {
     paddingLeft: 6,
     paddingRight: 6,
-    fontWeight: 400,
+    fontWeight: "400",
   },
   containerIcon: {
     width: "100%",

@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
         marginBottom: 18,
     },
     todoTitle: {
-        fontFamily: "sans-serif",
+        // fontFamily: "sans-serif",
         fontWeight: "bold",
         fontSize: 24,
     },

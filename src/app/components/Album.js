@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   title: {
-    fontFamily: "Roboto",
+    // fontFamily: "Roboto",
     fontWeight: "bold",
     fontSize: 24,
     marginBottom: 12,
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   roundedImage: {
     borderTopLeftRadius: 12,
     borderBottomLeftRadius: 12,
-    backgroundSize: "unset",
+    // backgroundSize: "unset",
     width: 50,
     height: "100%",
   },

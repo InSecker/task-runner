@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
   addButtonText: {
     paddingLeft: 6,
     paddingRight: 6,
-    fontWeight: 400,
+    fontWeight: "400",
   },
   containerIcon: {
     width: "100%",
