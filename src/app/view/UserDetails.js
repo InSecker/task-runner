@@ -10,7 +10,7 @@ import EmailIcon from "../../../assets/Email.png";
 import PhoneIcon from "../../../assets/Phone.png";
 import MoreIcon from "../../../assets/More.png";
 import { fetchAPI, orderTodos } from "../utils/helpers";
-import MapView from "react-native-maps";
+// import MapView from "react-native-maps";
 
 const UserDetails = ({ route, navigation }) => {
     const { id, user } = route.params;
@@ -72,14 +72,14 @@ const UserDetails = ({ route, navigation }) => {
                 />
             )}
             <Header action={() => navigation.navigate("Home")} title="Back to home" />
-            <View style={styles.mapContainer}>
+            {/* <View style={styles.mapContainer}>
                 <MapView style={[StyleSheet.absoluteFillObject]}  initialRegion={{
                     latitude: 37.78825,
                     longitude: -121.4324,
                     latitudeDelta: 0.0922,
                     longitudeDelta: 0.0421
                 }}/>
-            </View>
+            </View> */}
             <View style={styles.userContainer}>
                 <Text style={styles.name}>{user?.name}</Text>
                 <View style={styles.wrapper}>
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         flexDirection: "column",
-        marginTop: "16px"
+        marginTop: 16,
     },
     mapContainer: {
         width: "100%",
@@ -152,10 +152,10 @@ const styles = StyleSheet.create({
         opacity: 0.8
     },
     userContainer: {
-        width: "330px",
+        width: 330,
         height: "auto",
         position: "absolute",
-        top: "200px",
+        top: 200,
         marginLeft: "auto",
         marginRight: "auto",
         left: 0,
@@ -164,31 +164,31 @@ const styles = StyleSheet.create({
     },
     name: {
         fontWeight: "bold",
-        fontSize: "32px",
-        fontFamily: "sans-serif",
+        fontSize: 32,
+        // fontFamily: "sans-serif",
     },
     userInfoRow: {
         width: "100%",
-        height: "16px",
+        height: 16,
         flex: 1,
         flexDirection: "row",
-        maxHeight: "16px",
+        maxHeight: 16,
         justifyContent: "center",
-        marginBottom: "12px",
+        marginBottom: 12,
     },
     userInfoIcon: {
-        height: "16px",
-        width: "16px",
-        marginRight: "8px",
+        height: 16,
+        width: 16,
+        marginRight: 8,
     },
     icon: {
-        height: "12px",
-        width: "12px",
+        height: 12,
+        width: 12,
     },
     userInfo: {
-        fontSize: "14px",
+        fontSize: 14,
         fontWeight: "bold",
-        fontFamily: "sans-serif",
+        // fontFamily: "sans-serif",
     },
     posts: {
         width: "100%",
@@ -198,23 +198,23 @@ const styles = StyleSheet.create({
     },
     post: {
         width: "100%",
-        marginBottom: "16px",
+        marginBottom: 16,
     },
     todoRow: {
         width: "100%",
         flex: 1,
         flexDirection: "row",
         justifyContent: "space-between",
-        marginBottom: "18px",
+        marginBottom: 18,
     },
     todoTitle: {
         fontFamily: "sans-serif",
         fontWeight: "bold",
-        fontSize: "24px",
+        fontSize: 24,
     },
     moreIcon: {
-        maxWidth: "32px",
-        height: "32px",
+        maxWidth: 32,
+        height: 32,
         borderRadius: 8,
         backgroundColor: "white",
         flex: 1,

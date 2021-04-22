@@ -28,8 +28,8 @@ const styles = StyleSheet.create({
     left: 0,
     top: 0,
     width: "100%",
-    height: "60px",
-    fontFamily: "sans-serif",
+    height: 60,
+    // fontFamily: "sans-serif",
     zIndex: 10,
   },
   headerContainer: {
@@ -45,12 +45,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   iconContainer: {
-    height: "14px",
-    width: "14px",
+    height: 14,
+    width: 14,
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    marginLeft: "32px",
-    marginRight: "8px",
+    marginLeft: 32,
+    marginRight: 8,
   },
 });

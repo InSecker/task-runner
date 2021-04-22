@@ -107,12 +107,12 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     icon: {
-        height: "12px",
-        width: "12px",
+        height: 12,
+        width: 12,
     },
     moreIcon: {
-        maxWidth: "32px",
-        height: "32px",
+        maxWidth: 32,
+        height: 32,
         borderRadius: 8,
         backgroundColor: "white",
         flex: 1,

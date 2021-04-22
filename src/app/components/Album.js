@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 12,
     borderBottomLeftRadius: 12,
     backgroundSize: "unset",
-    width: "50px",
+    width: 50,
     height: "100%",
   },
 });

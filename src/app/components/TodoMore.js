@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "left",
     width: "100%",
-    minHeight: "80px",
+    minHeight: 80,
     backgroundColor: "#f3f3f3",
     borderWidth: 1,
     borderRadius: 16,
