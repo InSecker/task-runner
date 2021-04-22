@@ -35,33 +35,35 @@ const PostDetails = ({ navigation, route }) => {
 
     return (
         <View style={styles.container}>
-            <ScrollView style={{ width: '100%', }}>
-                <Header action={() => navigation.navigate("UserDetails", { id: userId })} title="Back to user"/>
-                <View style={{ height: 80 }}/>
-                <View style={{ alignContent: "center", width: '85%' }}>
-                    <Text style={styles.title}>{post.title}</Text>
-                    <Text>{post.body}</Text>
+            <ScrollView>
+                <View style={{ width: '85%', justifyContent: 'center', flex: 1 }}>
+                    <Header action={() => navigation.navigate("UserDetails", { id: userId })} title="Back to user"/>
+                    <View style={{ height: 80 }}/>
+                    <View style={{ alignContent: "center", width: '85%' }}>
+                        <Text style={styles.title}>{post.title}</Text>
+                        <Text>{post.body}</Text>
+                    </View>
+
+                    {isCommentModelOpen && (
+                        <Modal
+                            title="Post new comment"
+                            action={(newComment) => setNewComment(newComment)}
+                            close={() => cleanStates()}
+                            placeholder="Enter new comment"
+                            actionTitle="Validate"
+                            isError={isError}
+                        />
+                    )}
+
+                    <View style={styles.commentWrapper}>
+                        <Text style={styles.title}>Comment</Text>
+                        <TouchableOpacity onPress={() => setIsCommentModelOpen(true)} style={styles.moreIcon}>
+                            <Image style={styles.icon} source={MoreIcon}/>
+                        </TouchableOpacity>
+                    </View>
+
+                    {comments && comments.map((comment, i) => <Comment comment={comment} key={i}/>)}
                 </View>
-
-                {isCommentModelOpen && (
-                    <Modal
-                        title="Post new comment"
-                        action={(newComment) => setNewComment(newComment)}
-                        close={() => cleanStates()}
-                        placeholder="Enter new comment"
-                        actionTitle="Validate"
-                        isError={isError}
-                    />
-                )}
-
-                <View style={styles.commentWrapper}>
-                    <Text style={styles.title}>Comment</Text>
-                    <TouchableOpacity onPress={() => setIsCommentModelOpen(true)} style={styles.moreIcon}>
-                        <Image style={styles.icon} source={MoreIcon}/>
-                    </TouchableOpacity>
-                </View>
-
-                {comments && comments.map((comment, i) => <Comment comment={comment} key={i}/>)}
             </ScrollView>
         </View>
     );
@@ -85,6 +87,9 @@ const Comment = ({ comment }) => (
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#F4F4F4',
+        justifyContent: 'center',
+        flex: 1,
+        width: '100%',
     },
     postWrapper: {
         // flex: 1,
