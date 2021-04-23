@@ -19,7 +19,7 @@ import MoreIcon from "../../../assets/More.png";
 import { fetchAPI, orderTodos } from "../utils/helpers";
 import MapView, { Marker } from "react-native-maps";
 import { ScrollView } from "react-native-gesture-handler";
-import AlbumDetails from "../shared/AlbumDetails";
+import AlbumDetails from "./AlbumDetails";
 
 const UserDetails = ({ route, navigation }) => {
   const { id, user } = route.params;
@@ -162,6 +162,7 @@ const UserDetails = ({ route, navigation }) => {
             {albums &&
               albums.map((album, i) => (
                 <TouchableOpacity
+                  key={i}
                   onPress={() => {
                     setAlbumIndex(i);
                     setIsAlbumDetails(true);
@@ -174,6 +175,7 @@ const UserDetails = ({ route, navigation }) => {
               ))}
           </View>
         </View>
+
       </ScrollView>
     </View>
   );
