@@ -3,9 +3,9 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 import { configuration as api } from "../../../config";
 import { fetchAPI } from "../utils/helpers";
-import Map from "../components/Map";
+import Map from "../shared/Map";
 import UserList from "../components/UserList";
-import SearchBar from "../components/SearchBar";
+import SearchBar from "../shared/SearchBar";
 
 const Home = ({ navigation }) => {
     const [searchText, setSearchText] = useState("");

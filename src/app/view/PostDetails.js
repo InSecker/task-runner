@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Avatar } from "react-native-elements";
 import { fetchAPI } from "../utils/helpers";
-import Header from "../components/Header";
-import Modal from "../components/Modal";
+import Header from "../shared/Header";
+import Modal from "../shared/Modal";
 import MoreIcon from "../../../assets/More.png";
 
 

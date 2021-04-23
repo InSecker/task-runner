@@ -41,9 +41,9 @@ const TodoMore = ({ data, setIsTodoModalOpen, setTodos }) => {
           onPress={() => setIsTodoModalOpen(false)}
           style={styles.containerIcon}
         >
-          <Icon style={styles.iconClose} name="close" size={25}></Icon>
+          <Icon style={styles.iconClose} name="close" size={25}/>
         </TouchableOpacity>
-        <View style={styles.closeIconContainer}></View>
+        <View style={styles.closeIconContainer}/>
         <Text style={styles.titleNew}>Create a new Todo</Text>
         <TextInput
           style={styles.contentNew}

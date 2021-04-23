@@ -20,13 +20,9 @@ const TodoCard = ({ todo, todos, setTodos }) => {
         <Text style={styles.text}>{todo.title}</Text>
         <TouchableOpacity onPress={toggleCheckbox}>
           {todo.completed ? (
-            <Icon style={styles.icon} name="check-box" size={20}></Icon>
+            <Icon style={styles.icon} name="check-box" size={20}/>
           ) : (
-            <Icon
-              style={styles.icon}
-              name="check-box-outline-blank"
-              size={20}
-            ></Icon>
+            <Icon style={styles.icon} name="check-box-outline-blank" size={20}/>
           )}
         </TouchableOpacity>
       </View>

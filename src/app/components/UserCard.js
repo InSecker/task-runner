@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableHighlight, Image } from "react-native";
-import { Avatar } from "react-native-elements";
 
 const UserCard = ({ user, navigation }) => {
   const { name } = user;

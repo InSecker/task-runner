@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import Header from "../components/Header";
+import Header from "../shared/Header";
 import Post from "../components/Post";
 import Album from "../components/Album";
-import Modal from "../components/Modal";
+import Modal from "../shared/Modal";
 import TodoList from "../../app/components/TodoList";
 import CompanyIcon from "../../../assets/Company.png";
 import EmailIcon from "../../../assets/Email.png";
 import PhoneIcon from "../../../assets/Phone.png";
 import MoreIcon from "../../../assets/More.png";
 import { fetchAPI, orderTodos } from "../utils/helpers";
-import MapView from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
 import { ScrollView } from "react-native-gesture-handler";
 
 const UserDetails = ({ route, navigation }) => {
@@ -21,6 +21,13 @@ const UserDetails = ({ route, navigation }) => {
     const [isTodoModalOpen, setIsTodoModalOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false); // todo : add loader
     const [isError, setIsError] = useState(false);
+
+    const currentUserLocation = {
+        latitude: parseFloat(user.address.geo.lat),
+        longitude: parseFloat(user.address.geo.lng),
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421
+    };
 
     useEffect(() => {
         const randomAlbumIds = [];
@@ -74,12 +81,11 @@ const UserDetails = ({ route, navigation }) => {
                     />
                 )}
                 <View style={styles.mapContainer}>
-                    <MapView style={[StyleSheet.absoluteFillObject]} initialRegion={{
-                        latitude: 37.78825,
-                        longitude: -121.4324,
-                        latitudeDelta: 0.0922,
-                        longitudeDelta: 0.0421
-                    }}/>
+                    <MapView style={[StyleSheet.absoluteFillObject]} initialRegion={currentUserLocation}>
+                        <Marker coordinate={currentUserLocation}>
+                            <Image source={require('../../../assets/pin.png')} style={{height: 35, width:35 }} />
+                        </Marker>
+                    </MapView>
                 </View>
                 <Header action={() => navigation.navigate("Home")} title="Back to home"/>
                 <View style={styles.userContainer}>

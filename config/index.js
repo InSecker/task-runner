@@ -1,5 +1,5 @@
 export const configuration = {
-    base_url: 'https://jsonplaceholder.typicode.com',
+    base_url: 'https://jsonplaceholder.cypress.io',
     endpoints: {
         users: '/users',
         todos: '/todos',
