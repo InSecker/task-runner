@@ -18,9 +18,12 @@ const Home = ({ navigation }) => {
     };
 
     const searchUser = (searchedText) => {
-        const searchedUser = users.filter(user => user.name.indexOf(searchedText) !== -1)
-
-        console.log('searchedUser : ', searchedUser);
+      if (searchedText.length >= 2) {
+        const findedUser = users.filter(user => user.name.includes(searchedText));
+        setUsers(findedUser);
+      } else {
+        fetchUsers();
+      }
     };
 
     useEffect(() => {
