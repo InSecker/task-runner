@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  ActivityIndicator,
+} from "react-native";
 import Header from "../shared/Header";
 import Post from "../components/Post";
 import Album from "../components/Album";
@@ -70,7 +77,11 @@ const UserDetails = ({ route, navigation }) => {
     setIsError(false);
   };
 
-  return isAlbumDetails ? (
+  return isLoading ? (
+    <View style={styles.loaderContainer}>
+      <ActivityIndicator size="large" color="#80A6C5" />
+    </View>
+  ) : isAlbumDetails ? (
     <View style={styles.albumContainer}>
       <AlbumDetails
         setIsAlbumDetails={setIsAlbumDetails}
@@ -180,6 +191,13 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     alignContent: "center",
+  },
+  loaderContainer: {
+    width: "100%",
+    height: "100%",
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
   wrapper: {
     width: "100%",
