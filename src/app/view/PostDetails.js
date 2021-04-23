@@ -78,7 +78,7 @@ const Comment = ({ comment }) => (
         <View style={styles.postContainer}>
             <View style={styles.infoContainer}>
                 <Avatar source={{ uri: 'https://cdn3.iconfinder.com/data/icons/business-avatar-1/512/3_avatar-512.png' }}/>
-                <Text style={styles.text}>John Doe</Text>
+                <Text style={styles.text}>{comment.email.split(new RegExp('[-+.@_()*/:? ]', 'g'))[0]}</Text>
             </View>
             <View style={styles.commentContainer}>
                 <Text style={styles.commentText} numberOfLines={2}>{comment.body}</Text>
