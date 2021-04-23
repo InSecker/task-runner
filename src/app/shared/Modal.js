@@ -64,9 +64,9 @@ export default Modal;
 const styles = StyleSheet.create({
     modalContainer: {
         position: "absolute",
-        left: 0,
-        top: 300,
-        width: "80%",
+        left: "8%",
+        top: "30%",
+        width: "85%",
         height: "10%",
         flex: 1,
         alignItems: "center",
@@ -131,7 +131,9 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 16,
         borderColor: "#fff",
-        height: "100%",
+        height: 150,
+        paddingLeft: 15,
+
     },
     title: {
         fontWeight: "bold",
